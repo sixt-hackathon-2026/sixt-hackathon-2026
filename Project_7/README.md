@@ -2,6 +2,8 @@
 
 **Project owner:** Ioannis Tzachristas (TUM) · [ioannis.tzachristas@tum.de](mailto:ioannis.tzachristas@tum.de) · [LinkedIn](https://www.linkedin.com/in/ioannis-tzachristas-83a00522a/). On the day, ask on site.
 
+**P7 student guidance is available now.** Competition datasets, answer keys and organizer materials are not included in this repository. Stage data will be provided separately when the organizers authorize release.
+
 **Hackathon:** Friday, 13 November 2026, HQ Pullach, Academy. All times below are local **CET (Europe/Berlin)**. Teams have 1 to 3 people; follow the main repository's topic-selection instructions by 10:00.
 
 **Turn business questions into correct answers. Build a method, calculate the answers from the supplied company data, and submit a CSV.**
@@ -20,6 +22,7 @@ Small models working with code, SQL, retrieval and other tools are especially we
 2. Use your chosen models and tools to inspect the data, link related records, and calculate an answer for each question.
 3. Check the answers and export the required two-column CSV.
 4. Explain your architecture, methods, validation and limitations in `SUBMISSION.md` and your demo video or slides.
+5. After the Hackathon, coordinate with the organizers and upload your report manuscript to arXiv to finalize your P7 submission.
 
 You may use an existing agent framework, a custom workflow, or a mixture of model calls and ordinary programs. Framework choice alone earns no bonus. There is no requirement to submit a frozen executable solver: the automatically graded deliverable is the answer CSV. Your method and its evidence are assessed separately.
 
@@ -30,12 +33,13 @@ You may use an existing agent framework, a custom workflow, or a mixture of mode
 | Before the Hackathon: 12 Nov | This overview, toy examples, marking policy and method-report template | Prepare your environment and team repository |
 | Stage 1: public, 13 Nov at 09:30 | 25 data CSV files, business rules, column descriptions, 200 scored questions, 10 unscored worked examples, blank answer template and optional format checker | `public_answers.csv` before the 14:45 lock |
 | Stage 2: final, 13 Nov at 14:45 | A separate snapshot with 25 data CSV files, its rules and column descriptions, 200 scored questions and blank answer template | `final_answers.csv`, code, `SUBMISSION.md`, video or slides and method evidence by 16:45 |
+| After the Hackathon: timing agreed with organizers | Report preparation and publication coordination | Required arXiv manuscript upload after coordination, plus upload confirmation and the arXiv link when available |
 
 There are **400 scored questions in total**, plus **10 unscored practice examples**. Every question has one scalar answer: a number, count, date, true/false value, or a text label; some questions request an ordered list in one text cell.
 
 Treat the two snapshots separately. Reuse your workflow where helpful, but calculate each stage's answers from that stage's files and rules. Do not concatenate the snapshots.
 
-The organizers share each stage archive and its SHA-256 at the stated release time. At 14:45 they record the latest eligible commit in each team's registered repository and lock the public answers. Later edits do not change that locked submission. At 16:45 they record the final submission. Push your files before each cutoff; keep the repository accessible to the topic owner and organizers. Record the archive filenames, hashes and the code revision used for your calculations in `SUBMISSION.md`; organizers record the locked submission commit IDs separately.
+The stated stage times are the planned schedule; the organizers must authorize each dataset release separately. At release, they share the appropriate archive and its SHA-256. At 14:45 they record the latest eligible commit in each team's registered repository and lock the public answers. Later edits do not change that locked submission. At 16:45 they record the Hackathon-day final submission. Push your files before each cutoff; keep the repository accessible to the topic owner and organizers. Record the archive filenames, hashes and the code revision used for your calculations in `SUBMISSION.md`; organizers record the locked submission commit IDs separately.
 
 “Public stage” means the first competition stage, not that the repository or answer key is public. Reference answers and answer-level grading details stay private during the event. Any live leaderboard feedback will be announced to all teams on site.
 
@@ -171,8 +175,19 @@ Use [METHOD_REPORT_TEMPLATE.md](METHOD_REPORT_TEMPLATE.md) to prepare `SUBMISSIO
 - **Either** `Project_7/submission/demo.mp4` (1-minute demo video, under 50 MB) **or** `Project_7/submission/slides.pdf` (at most 5 slides).
 - Completed model declaration, including coding assistants and fallbacks; bonus evidence if claiming the small-model bonus.
 - Dataset citation and any external code/model acknowledgements.
+- After organizer coordination: the required report manuscript upload to arXiv, with confirmation supplied to the organizers, as explained below.
 
-The registered team repository is the submission. Keep the answer files at `Project_7/public_answers.csv` and `Project_7/final_answers.csv`. By 16:45, push all final deliverables; no hacking is allowed during the 16:45-17:45 review period. Six finalists are selected across topics. If selected, give a maximum 3-minute pitch plus 2 minutes of Q&A during 17:45-18:20. Teams choosing a backup topic must name a primary topic and are scored under that primary topic's rubric.
+The registered team repository is the Hackathon-day submission. Keep the answer files at `Project_7/public_answers.csv` and `Project_7/final_answers.csv`. By 16:45, push all Hackathon-day deliverables; no hacking is allowed during the 16:45-17:45 review period. Six finalists are selected across topics. If selected, give a maximum 3-minute pitch plus 2 minutes of Q&A during 17:45-18:20. Teams choosing a backup topic must name a primary topic and are scored under that primary topic's rubric.
+
+## Required report and coordinated arXiv upload
+
+**This requirement applies to Problem 7.** Submit your method report as `Project_7/SUBMISSION.md` by **16:45 CET on 13 November 2026**, together with the other Hackathon-day deliverables.
+
+To finalize your P7 submission, your team must also prepare the report as an arXiv manuscript and upload it **after coordinating with the organizers**. Agree the upload timing, author list, dataset citation and manuscript content with the organizers before uploading. The later upload date will be confirmed during that coordination; it is not the 16:45 Hackathon deadline.
+
+Send the upload confirmation and, when available, the arXiv identifier or link to the organizers. Record them in the publication follow-up section of your report. This later step does not replace the report due at 16:45 or reopen the locked answer CSVs and event results.
+
+The report upload does **not** authorize publication of the challenge datasets, golden answers, private evaluation details or organizer material. Keep these out of the manuscript, source files and attachments. Use the supplied public toy examples where illustrations are needed. Coordinate any publication or submission difficulty with the organizers.
 
 Follow the event's data and integrity rules: use supplied synthetic/public data, never commit real SIXT/customer/personal data or secrets, and do not share the source repository outside the Hackathon. If a late or inaccessible repository prevents verification, the unverifiable dataset or code/reproducibility component receives no points under the event's late policy. Other misconduct follows the event's published disqualification rules.
 

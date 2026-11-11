@@ -21,10 +21,10 @@
 | Project_2 | Nowcasting / Forecasting Mileage | Mock or anonymized vehicle status sample |
 | Project_3-4 | Turnaround: Predict Action Time and Predict Tasks (run as one topic for now, to be adapted after hearing from the owner) | Mock or random sample |
 | Project_5 | Meta-Evaluation of LLM-as-Judge | Bitext (5 languages) + fictional policy, hidden test set |
-| Project_7 | SIXT + TUM Enterprise Data Agent Challenge | Synthetic enterprise CSVs; two scheduled releases; pre-event toy examples |
+| Project_7 | TUM x SIXT topic | TBD |
 | Project_6 | Placeholder | TBD |
 
-Owners and contact emails are in each project README. The Project 7 / TUM contact is Ioannis Tzachristas ([ioannis.tzachristas@tum.de](mailto:ioannis.tzachristas@tum.de), [LinkedIn](https://www.linkedin.com/in/ioannis-tzachristas-83a00522a/)).
+Owners and contact emails are in each project README.
 
 ## 3. Checklist
 
@@ -112,8 +112,6 @@ To prepare:
 | Business relevance and reusability | 15 | Could Sixt use it? Clear next steps |
 | Code quality and reproducibility | 10 | Runs from `SUBMISSION.md`, readable, no secrets or real data |
 | Presentation and demo | 10 | Clear story, working demo, good answers |
-
-**Project 7 only:** use the [Project 7 marking scheme](../Project_7/README.md#marking-scheme): 65 dataset points + 35 points from the five non-results criteria, plus a verified +15 small-model bonus instead of the general +5 (maximum 115). All other projects keep the scoring table and bonus below unchanged. The full release schedule, submission rules and evidence requirements are in the Project 7 brief. Keep its live stage packages, private reference answers and grading records outside this participant repository.
 
 ### Project-specific results metrics
 

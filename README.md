@@ -48,7 +48,7 @@ The hackathon is on **Friday, 13 November 2026**. You get the GitHub invite on T
    | [Project_2](Project_2/README.md) | Nowcasting / Forecasting Mileage |
    | [Project_3-4](Project_3-4/README.md) | Turnaround: Predict Action Time and Predict Tasks (one topic for now) |
    | [Project_5](Project_5/README.md) | Meta-Evaluation Framework for LLM-as-Judge Agentic Systems |
-   | [Project_7](Project_7/README.md) | SIXT + TUM Enterprise Data Agent Challenge: calculate answers and submit CSVs |
+   | [Project_7](Project_7/README.md) | TUM x SIXT topic, to be announced (not yet open for selection) |
    | [Project_6](Project_6/README.md) | Placeholder, to be announced (not yet open for selection) |
 
    ```bash
@@ -106,7 +106,7 @@ Afterwards, keep the agent inside your project folder, and make sure it never co
 
 ## Good to know
 
-- **Publication opportunity.** There is also the possibility to turn your work into an arXiv-style publication. Reach out to Ioannis Tzachristas ([ioannis.tzachristas@tum.de](mailto:ioannis.tzachristas@tum.de), [LinkedIn](https://www.linkedin.com/in/ioannis-tzachristas-83a00522a/)) to get started. Reference templates will be added in [arxiv_templates/](arxiv_templates/README.md). Feel free to reach out to us even after the hackathon for this publication.
+- **Publication opportunity.** There is also the possibility to turn your work into an arXiv-style publication. Reach out to the TUM people to get started. Reference templates will be added in [arxiv_templates/](arxiv_templates/README.md). Feel free to reach out to us even after the hackathon for this publication.
 
 ## Repository layout
 
@@ -118,6 +118,6 @@ sixt-hacakthon-2026/
 ├── arxiv_templates/ <- templates for the optional arXiv-style publication (coming later)
 ├── Project_1/, Project_2/, Project_3-4/, Project_5/
 ├── Project_6/       <- placeholder, not yet open
-├── Project_7/       <- SIXT + TUM Enterprise Data Agent Challenge
+├── Project_7/       <- TUM x SIXT topic, not yet open
 └── SUBMISSION_TEMPLATE.md
 ```
