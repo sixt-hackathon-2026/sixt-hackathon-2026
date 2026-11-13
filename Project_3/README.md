@@ -88,7 +88,8 @@ Do this **before the hackathon day**.
   (`dev_pairs.jsonl`). Run your judge on them unchanged: only `--criterion` and `--dev` change.
 - **16:00, code freeze:** commit and push your final judge as `starter_pack/final_judge.py`. This commit is your judge;
   later changes to it don't count.
-- **16:00, test cases released:** you get `hidden_cases.zip`, the unseen test cases for both criteria, **without labels**.
+- **16:00, test cases released:** the unseen test cases for both criteria, **without labels**, appear in
+  `starter_pack/hidden/` in the main repo; pull them into your fork.
 - **16:00-16:45:** run your frozen judge on both test sets **twice** (for consistency) with `claude-haiku-4.5`, then
   push the result files:
 
