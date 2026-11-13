@@ -118,11 +118,13 @@ An invalid final plan ranks last.
 ### Submission
 
 1. Write the plan with `fleetkit.write_plan`. It checks the format, not the validity.
-2. Copy the file into your team folder in the shared folder. Use a new file name for each submission, for example `level1_v2.csv`.
-3. Within about a minute, `level1_v2.result.md` appears next to it.
+2. Upload the file into your team folder in the OneDrive folder `Fleet-Challenge-Submissions`. You got the link to your team folder by email.
+   Use a new file name for each submission, for example `level1_v2.csv`.
+   A file name that was scored before is not scored again.
+3. The organizers score new plans in rounds during the day. After a round, `level1_v2.result.md` appears next to your plan in your team folder.
    It shows if the plan is valid, up to 50 violations, and for a valid plan the profit with its totals: committed revenue, new revenue, holding cost, addition cost, transfer cost, and the number of cars added, removed and transferred.
-4. `leaderboard.md` in the shared folder shows the best profit of each team, and the profits of the do-nothing plan and the baseline plan.
-5. Before the deadline, put your final plan into your team folder as `final.csv`.
+4. `leaderboard.md` in the top folder `Fleet-Challenge-Submissions` shows the best profit of each team, and the profits of the do-nothing plan and the baseline plan.
+5. Before the deadline, upload your final plan into your team folder as `final.csv`.
 
 ## 5. How your plan is scored
 
