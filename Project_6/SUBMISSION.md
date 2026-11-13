@@ -1,7 +1,7 @@
 # Submission: Project 6, Task Time Detective
 
-## Authors
-**Team name:** <your team name>
+## Author: Johannes Schleicher
+**Team name:** Rent me if you can
 
 **Project:** Project 6: Task Time Detective, how long does each turnaround task take?
 
