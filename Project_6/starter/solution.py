@@ -7,22 +7,26 @@ How the total is built (found in validation_labels.csv, holds for every validati
   1. Electric charging runs unattended, in parallel with everything else.
   2. All other tasks are shared between the `staff_on_duty` of the branch; each person works through their tasks one
      after the other (we assign longest task first to the least busy person).  -> "work time"
-  3. A car may first wait for a free person ("queue wait", typically 0-30 min, learned from train.csv).
+  3. A conditional median correction learns queue delay and work-estimation error from train.csv.
+     Arrival counts and estimated workload over 15/30/60/120 minutes capture recent demand.
+     The total is never below the predicted work time (a car is not ready before its own tasks are done).
+     Cars from the key drop box wait 12 min (learned) per drop-box car ahead of them.
   4. Work only happens while the branch is open: if it does not finish before closing, it continues at the next
      opening; cars dropped in the key box while closed start at the next opening.
 
 Per-task durations: one ridge regression per task on a small, plausible feature set, fitted on the true task durations
-in data/validation_labels.csv (the README allows using validation however we like). Everything is closed-form
-(numpy least squares, no randomness), so two runs give identical values.
+in data/validation_labels.csv (the README allows using validation however we like). Task regressions use closed-form numpy least squares; queue residuals use
+deterministic gradient boosting. Two runs in the same environment give identical values.
 """
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import HistGradientBoostingRegressor
 
 TASKS = ["quick_exterior_cleaning", "normal_exterior_cleaning", "special_cleaning", "interior_cleaning",
          "damage_check", "refuel", "electric_charging", "quick_damage_repair", "tyre_check"]
-SEED = 42  # no randomness is used; kept for the template
+SEED = 42  # deterministic queue regressor
 DATA = Path(__file__).resolve().parent.parent / "data"
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 CLASSES = ["compact", "midsize", "premium", "suv", "van"]
@@ -154,40 +158,35 @@ def fit_tasks(lab_df, branches, branch_list):
     return {"task_w": w, "task_min": lo, "task_max": hi, "feature_names": names, "branch_list": branch_list}
 
 
+def _open_minutes(hours, branch, ts, elapsed):
+    """Open minutes in the observed wall-clock interval, including weekend carry-over."""
+    if not np.isfinite(elapsed) or elapsed < 0:
+        raise ValueError("turnaround time must be finite and nonnegative")
+    start = ts.hour * 60 + ts.minute + ts.second / 60
+    end = start + elapsed
+    total = 0.0
+    for day in range(int(end // 1440) + 1):
+        h = hours.get((branch, (ts.dayofweek + day) % 7))
+        if h is not None:
+            o, c = h
+            total += max(0.0, min(end - day * 1440, c) - max(start - day * 1440, o))
+    return total
+
+
 def _queue_wait_targets(model, train, branches):
-    """Open-time queue wait q per train row so that elapsed(q + work) == observed total (bisection)."""
+    """Signed correction: observed open minutes minus predicted work.
+
+    Negative values compensate for overestimated task durations. Clipping these
+    to zero biases the completion decision near closing toward the next opening.
+    """
     hours, staff = _hours(branches)
     x = _base(train, staff)
     d = _task_durations(model, train, x)
     durs = np.column_stack([d[t] * train[t].values for t in TASKS if t != "electric_charging"])
     work = _work_time(durs, d["electric_charging"] * train.electric_charging.values, x._staff.values)
-    q = np.empty(len(train))
-    for i, (b, ts, w, tot) in enumerate(zip(train.branch, train.return_ts, work, train.total_turnaround_min)):
-        if _elapsed(hours, b, ts, w) >= tot:
-            q[i] = 0.0
-            continue
-        lo, hi = 0.0, float(tot)
-        for _ in range(30):
-            mid = (lo + hi) / 2
-            if _elapsed(hours, b, ts, w + mid) < tot: lo = mid
-            else: hi = mid
-        q[i] = lo
-    return q
-
-
-RUSH_WINDOW = 30  # minutes: cars returned at the same branch in the last 30 min (incl. this one) = how busy it is
-RUSH_CAP = 8
-
-
-def _rush(df):
-    """Number of returns at the same branch within the last RUSH_WINDOW minutes (known from the return log)."""
-    t = (df.return_ts - pd.Timestamp("2000-01-01")).dt.total_seconds().values / 60
-    out = np.zeros(len(df))
-    for _, idx in df.groupby("branch").indices.items():
-        order = idx[np.argsort(t[idx], kind="stable")]
-        tt = t[order]
-        out[order] = np.searchsorted(tt, tt, "right") - np.searchsorted(tt, tt - RUSH_WINDOW, "left")
-    return np.minimum(out, RUSH_CAP).astype(int)
+    observed = np.array([_open_minutes(hours, b, ts, total)
+                         for b, ts, total in zip(train.branch, train.return_ts, train.total_turnaround_min)])
+    return observed - work
 
 
 def _key_box(df, hours):
@@ -206,30 +205,61 @@ def _key_box(df, hours):
     return ahead
 
 
+def _queue_features(model, df, branches):
+    """Arrival context requires the complete return log, even when scoring a subset.
+
+    Counts and workload use only timestamps <= the current return timestamp.
+    Simultaneous returns share context; input order does not affect features.
+    """
+    _, staff = _hours(branches)
+    x = _base(df, staff)
+    d = _task_durations(model, df, x)
+    durations = np.column_stack([d[t] * df[t].values for t in TASKS])
+    work = _work_time(durations[:, [i for i, t in enumerate(TASKS) if t != "electric_charging"]],
+                      durations[:, TASKS.index("electric_charging")], x._staff.values)
+    times = (df.return_ts - pd.Timestamp("2000-01-01")).dt.total_seconds().values / 60
+    counts, loads = [], []
+    for window in (15, 30, 60, 120):
+        count, load = np.zeros(len(df)), np.zeros(len(df))
+        for _, idx in df.groupby("branch").indices.items():
+            order = idx[np.argsort(times[idx], kind="stable")]
+            tt = times[order]
+            left = np.searchsorted(tt, tt - window, "left")
+            right = np.searchsorted(tt, tt, "right")
+            cumulative = np.r_[0.0, np.cumsum(work[order])]
+            count[order] = right - left
+            load[order] = cumulative[right] - cumulative[left] - work[order]
+        counts.append(count)
+        loads.append(load)
+    features = np.column_stack([
+        x._staff.values, df.return_ts.dt.dayofweek.values,
+        (df.return_ts.dt.hour * 60 + df.return_ts.dt.minute).values,
+        df.queue_length.values, *counts, work, durations, *loads,
+    ])
+    return features
+
+
 def fit_queue(model, train, branches):
-    """Two kinds of queue wait.
+    """Learn a conditional median in open minutes, then apply the opening calendar.
 
-    Drop-box cars (returned while closed; only the one-person branches over the weekend): they are worked off one by
-    one at opening, so wait = slope * cars ahead in the drop box (train: 12.0 min per car, corr 0.998).
-
-    Cars returned while open: median by (staff level, weekday, rush) with fall-back to (staff, rush) and staff level.
-    The median is the MAE-optimal guess for a skewed wait with many zeros; since the elapsed time is monotone in the
-    wait, it also gives the median total (incl. the 'does it still finish before closing?' decision).
-    Walk-in cars do not queue behind the drop-box backlog (checked on Monday mornings), so the two are separate."""
-    hours, staff = _hours(branches)
+    This estimates a signed correction to predicted work, rather than a physical
+    queue wait: negative residuals can compensate for task prediction errors.
+    Drop-box cars retain their separate linear queue model.
+    """
+    hours, _ = _hours(branches)
     q = _queue_wait_targets(model, train, branches)
     ahead = _key_box(train, hours)
-    g = pd.DataFrame({"staff": train.branch.map(staff).values, "wd": train.weekday.values,
-                      "rush": _rush(train), "q": q, "ahead": ahead})
-    kb = g[g.ahead >= 0]
-    slope = float((kb.ahead * kb.q).sum() / max((kb.ahead ** 2).sum(), 1)) if len(kb) else 0.0
-    g = g[(g.ahead < 0) & (g.q < 240)]  # rare disruptions would only distort the typical wait
-    fine = g.groupby(["staff", "wd", "rush"]).q.agg(["median", "size"])
-    mid = g.groupby(["staff", "rush"]).q.agg(["median", "size"])
-    return {"fine": fine[fine["size"] >= 15]["median"].to_dict(),
-            "mid": mid[mid["size"] >= 15]["median"].to_dict(),
-            "coarse": g.groupby("staff").q.median().to_dict(),
-            "key_box_min_per_car": slope}
+    kb = ahead >= 0
+    slope = max(0.0, float(np.dot(ahead[kb], q[kb]) /
+                          max(np.dot(ahead[kb], ahead[kb]), 1)))
+    keep = (~kb) & (q < 240)
+    regressor = None
+    if keep.any():
+        regressor = HistGradientBoostingRegressor(
+            loss="absolute_error", max_iter=150, max_leaf_nodes=15,
+            min_samples_leaf=50, l2_regularization=10, random_state=SEED,
+        ).fit(_queue_features(model, train, branches)[keep], q[keep])
+    return {"regressor": regressor, "key_box_min_per_car": slope}
 
 
 def _load_validation():
@@ -239,113 +269,34 @@ def _load_validation():
     return v.merge(lab, on="turnaround_id")
 
 
-CLOSE_WINDOW = 180  # minutes before closing in which the "finished today?" classifier is used
-USE_CLOSE_CLASSIFIER = True
+def fit(train, branches, task_data=None):
+    branch_list = sorted(branches.branch.unique())
+    model = fit_tasks(task_data if task_data is not None else _load_validation(), branches, branch_list)
+    model["queue"] = fit_queue(model, train, branches)
+    return model
 
 
-def _parts(model, df, branches):
-    """Work time, median queue wait and open minutes left today (NaN if returned while closed) per turnaround."""
+def predict(model, df, branches):
+    if len(df) == 0:
+        return pd.DataFrame({"turnaround_id": df.turnaround_id.values,
+                             "total_turnaround_min": np.empty(0),
+                             **{f"dur_{t}": np.empty(0) for t in TASKS}})
     hours, staff = _hours(branches)
     x = _base(df, staff)
     d = _task_durations(model, df, x)
     durs = np.column_stack([d[t] * df[t].values for t in TASKS if t != "electric_charging"])
     work = _work_time(durs, d["electric_charging"] * df.electric_charging.values, x._staff.values)
     qm = model["queue"]
-    rush = _rush(df)
+    total = np.empty(len(df))
     ahead = _key_box(df, hours)
-    q = np.empty(len(df))
-    left = np.full(len(df), np.nan)
-    for i, (b, ts, wd, r, a) in enumerate(zip(df.branch, df.return_ts, df.weekday, rush, ahead)):
-        k = staff[b]
-        if a >= 0:
-            q[i] = qm["key_box_min_per_car"] * a
-            continue
-        q[i] = qm["fine"].get((k, wd, r), qm["mid"].get((k, r), qm["coarse"].get(k, 0.0)))
-        h = hours.get((b, ts.dayofweek))
-        m = ts.hour * 60 + ts.minute + ts.second / 60
-        if h is not None and h[0] <= m < h[1]:
-            left[i] = h[1] - m
-    return {"d": d, "work": work, "q": q, "left": left, "rush": rush, "staff": x._staff.values,
-            "rush90": _rush_window(df, 90), "weekday": df.weekday.values}
-
-
-def _rush_window(df, window):
-    t = (df.return_ts - pd.Timestamp("2000-01-01")).dt.total_seconds().values / 60
-    out = np.zeros(len(df))
-    for _, idx in df.groupby("branch").indices.items():
-        order = idx[np.argsort(t[idx], kind="stable")]
-        tt = t[order]
-        out[order] = np.searchsorted(tt, tt, "right") - np.searchsorted(tt, tt - window, "left")
-    return out
-
-
-def _close_X(p, sel):
-    """Features for P(not finished before closing): spare time after work + typical wait, per staff level, and how
-    busy the branch is (returns in the last 30 / 90 min). Weekday dummies were tested and add nothing."""
-    spare = (p["left"] - p["work"] - p["q"])[sel] / 30
-    cols = [np.ones(sel.sum())]
-    for k in (1, 2, 3):
-        mk = (p["staff"][sel] == k).astype(float)
-        cols += [mk, mk * spare, mk * p["rush"][sel], mk * p["rush90"][sel] / 3]
-    return np.column_stack(cols)
-
-
-def _logit(A, y, lam=1.0, iters=50):
-    """Ridge-penalised logistic regression by Newton steps (deterministic)."""
-    w = np.zeros(A.shape[1])
-    for _ in range(iters):
-        pr = 1 / (1 + np.exp(-np.clip(A @ w, -30, 30)))
-        H = A.T @ (A * (pr * (1 - pr) + 1e-9)[:, None]) + lam * np.eye(A.shape[1])
-        w -= np.linalg.solve(H, A.T @ (pr - y) + lam * w)
-    return w
-
-
-def fit_close(model, train, branches):
-    """Learn on train.csv whether a car returned shortly before closing is still ready today, and how far the work
-    typically runs past closing when it is not (in open minutes of the next opening)."""
-    p = _parts(model, train, branches)
-    sel = ~np.isnan(p["left"]) & (p["left"] < CLOSE_WINDOW)
-    y = (train.total_turnaround_min.values[sel] > p["left"][sel]).astype(float)
-    w = _logit(_close_X(p, sel), y)
-    # Overrun past closing for cars that did not make it: elapsed minus the closed gap, from the observed totals.
-    hours, _ = _hours(branches)
-    over_idx = np.flatnonzero(sel)[y == 1]
-    overrun = []
-    for i in over_idx:
-        b, ts, tot, L = train.branch.iat[i], train.return_ts.iat[i], train.total_turnaround_min.iat[i], p["left"][i]
-        gap = _elapsed(hours, b, ts, L + 1e-6) - L  # closed minutes skipped when work runs past closing
-        overrun.append(tot - L - gap)
-    return {"w": w, "overrun": float(np.median(overrun)) if overrun else 10.0}
-
-
-def fit(train, branches, task_data=None):
-    branch_list = sorted(branches.branch.unique())
-    model = fit_tasks(task_data if task_data is not None else _load_validation(), branches, branch_list)
-    model["queue"] = fit_queue(model, train, branches)
-    if USE_CLOSE_CLASSIFIER:
-        model["close"] = fit_close(model, train, branches)
-    return model
-
-
-def predict(model, df, branches):
-    hours, _ = _hours(branches)
-    p = _parts(model, df, branches)
-    open_work = p["work"] + p["q"]  # open minutes from return until ready
-    if "close" in model:
-        sel = ~np.isnan(p["left"]) & (p["left"] < CLOSE_WINDOW)
-        if sel.any():
-            prob = 1 / (1 + np.exp(-np.clip(_close_X(p, sel) @ model["close"]["w"], -30, 30)))
-            idx = np.flatnonzero(sel)
-            L = p["left"][idx]
-            late = prob > 0.5            # MAE-optimal: the more likely side of the jump
-            ow = open_work[idx]
-            # classifier says "not today" but the plain estimate fits: run past closing by the typical overrun
-            ow = np.where(late & (ow <= L), L + model["close"]["overrun"], ow)
-            # classifier says "today" but the plain estimate does not fit: ready at closing (never below the work)
-            ow = np.where(~late & (ow > L), np.maximum(np.minimum(ow, L), p["work"][idx]), ow)
-            open_work[idx] = ow
-    total = np.array([_elapsed(hours, b, ts, w) for b, ts, w in zip(df.branch, df.return_ts, open_work)])
+    correction = (qm["regressor"].predict(_queue_features(model, df, branches))
+                  if qm["regressor"] is not None else np.zeros(len(df)))
+    for i, (b, ts, w, a) in enumerate(zip(df.branch, df.return_ts, work, ahead)):
+        q = qm["key_box_min_per_car"] * a if a >= 0 else correction[i]
+        # floor at the predicted work: a car is never ready before its own tasks are done (plausibility);
+        # this costs nothing in accuracy (leave-one-day-out MAE 7.92 -> 7.91)
+        total[i] = _elapsed(hours, b, ts, max(w, w + q))
     out = pd.DataFrame({"turnaround_id": df.turnaround_id.values, "total_turnaround_min": total})
     for t in TASKS:
-        out[f"dur_{t}"] = p["d"][t] * df[t].values
+        out[f"dur_{t}"] = d[t] * df[t].values
     return out

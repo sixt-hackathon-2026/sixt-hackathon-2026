@@ -27,22 +27,26 @@ queue wait are learned.
 manager would expect (table below). Predictions are clipped to the range seen in the data, so they are never negative
 or implausible.
 
-**Queue wait:** for every train turnaround we back out the queue wait that makes the structure above match the
-observed total. Two cases:
+**Queue wait:** for every train turnaround we compute exactly how many *open* minutes passed until it was ready and
+subtract the predicted work time. That residual (queue wait plus any error in the work estimate) is what we learn.
+Two cases:
 - **Key-box cars** (returned while closed; only BER/NUE/STR on Saturday evening and Sunday) are worked off one by one
   at opening: wait = **12.0 min × cars ahead in the key box** (train: correlation 0.998, residual MAE 2.4 min). Walk-in
   customers on Monday morning do *not* queue behind this backlog (checked), so the two cases are kept apart.
-- **Cars returned while open:** median wait by (staff level, weekday, *rush*), where rush = number of cars returned
-  at the same branch in the last 30 minutes. The median minimises absolute error, and because the elapsed time is
-  monotone in the wait it also makes the right "finished before closing or not" call on average.
+- **Cars returned while open:** a gradient-boosted *median* regression (scikit-learn `HistGradientBoostingRegressor`,
+  absolute-error loss, fixed seed). Its inputs are:
+  - time of day, staff level, weekday and `queue_length`;
+  - the car's own predicted task times and work time;
+  - how busy the branch is: number of returns **and their predicted work** in the last 15, 30, 60 and 120 minutes.
 
-**Finished today? (cars returned in the last 3 hours before closing):** a car that misses closing jumps by the whole
-closed night (about 750 min on a weekday, about 2,400 min from Saturday 16:00 at a centre branch to Monday). These few
-wrong calls made 45 % of the total error. A small logistic regression, learned on train.csv, estimates the probability
-of not finishing today from the spare time (time left minus work minus typical wait), the staff level and how busy
-the branch is (returns in the last 30 and 90 min). We predict the more likely side (probability > 0.5, the
-MAE-optimal choice). If that means "tomorrow", the work runs past closing by the typical overrun learned from train
-(22 min). Weekday dummies were tested and add nothing.
+  It only uses returns up to the car's own return time, never later ones. Predicting the median minimises absolute
+  error. Because the elapsed time is monotone in the wait, the median also makes the right "finished before closing or
+  not" call on average.
+- The total is never below the car's own predicted work time: a car is not ready before its tasks are done.
+
+A separate "finished today?" classifier for cars returned shortly before closing was tried on top of the simpler
+median model and improved it (validation 13.3 → 12.3 min). On top of the boosted wait model it made held-out late
+train cases worse (19.1 → 21.0 min), so it is not used.
 
 Assumptions and choices:
 - **Season is not used.** Train runs Jul to Sep, validation is the first week of October, and test is the three weeks
@@ -65,10 +69,17 @@ Assumptions and choices:
 | Structure + ridge per task + median queue wait by (staff, hour, weekday) | open | local, numpy | total MAE 14.6, WAPE 0.077, per-task MAE mean 3.35 | about 1 s total | no, rare tasks too shrunk |
 | Same, queue wait by (staff, weekday, rush), rare tasks tuned | open | local, numpy | total MAE 14.7, median AE 3.4, WAPE 0.075, per-task MAE mean 2.67 | about 1 s total | no |
 | Same + key-box queue rule (12 min per car ahead) | open | local, numpy | total MAE 13.3, median AE 3.2, WAPE 0.075, per-task MAE mean 2.67 | about 1 s total | no |
-| Same + "finished today?" logistic classifier near closing | open | local, numpy | **total MAE 12.3, median AE 3.2, WAPE 0.075, per-task MAE mean 2.67** | about 2 s total | **yes** |
+| Same + "finished today?" logistic classifier near closing | open | local, numpy | total MAE 12.3, median AE 3.2, WAPE 0.075, per-task MAE mean 2.67 | about 2 s total | no |
+| Key-box rule + boosted median regression for the wait (no classifier), total ≥ work | open | local, numpy + scikit-learn | **total MAE 7.9, median AE 2.4, 90 % within 10 min, WAPE 0.075, per-task MAE mean 2.67** | about 2 s total | **yes** |
 
-The classifier was also checked on later train weeks it did not see (fit on weeks before the cut, score after):
-total MAE 12.7 → 12.4 (cut 25 Aug) and 12.4 → 12.0 (cut 8 Sep).
+Later train weeks the wait models never saw (wait fitted on weeks before the cut, scored after; task models as in the
+submission):
+
+| Cut | Median groups + classifier | Boosted median regression |
+| --- | --- | --- |
+| 25 Aug | 12.3 (Saturday 13.1) | **7.7** (Saturday 6.8) |
+| 8 Sep | 12.0 (Saturday 11.0) | **6.2** (Saturday 3.8) |
+| 15 Sep | 11.7 (Saturday 13.8) | **6.4** (Saturday 3.9) |
 
 Earlier versions of `cv.py` predicted each day on its own, which hid the Saturday key-box cars from Sunday's queue
 count. It now predicts the whole week and scores only the held-out day; the numbers above use the corrected version.
@@ -78,23 +89,27 @@ Also tried and dropped:
 - FIFO and per-worker queue simulations (they over-predict: the data is not a closed queue);
 - minutes-to-closing bands for the wait (no gain).
 
-The quantile of the wait was checked on later train weeks: median (τ = 0.5 to 0.55) is best, giving total MAE 12.7 to
-12.8 there.
+The quantile of the wait was checked on later train weeks: median (τ = 0.5 to 0.55) is best, so the boosted model
+uses the absolute-error (median) loss.
 
 ## Results
 **Honest check:** `starter/cv.py` predicts each validation day with task models that never saw that day.
 
 | Metric | Baseline | Ours (leave-one-day-out) | README "strong" |
 | --- | --- | --- | --- |
-| Total MAE (min) | 99 | **12.3** | < 5 |
-| Total median abs. error (min) | | **3.2** | |
-| Share of totals within 10 min | | **74 %** | |
+| Total MAE (min) | 99 | **7.9** | < 5 |
+| Total median abs. error (min) | | **2.4** | |
+| Share of totals within 10 min | | **90 %** | |
 | Per-task WAPE | 0.55 | **0.075** | < 0.2 |
 | Per-task MAE mean (macro) | 13.6 | **2.67** | |
 | Negative or missing estimates | 0 | 0 | 0 |
 
-Reproducibility: everything is closed-form (least squares, medians). `python run.py --repeat` prints
-`run twice: IDENTICAL`. It runs in about 1 s.
+Reproducibility:
+- Task models are closed-form least squares.
+- The wait model is gradient boosting with a fixed `random_state`.
+- `python run.py --repeat` prints `run twice: IDENTICAL` and runs in about 2 s.
+- Package versions are pinned in `requirements.txt`. The results depend on the scikit-learn version: we measured
+  7.91 min with 1.9.1, while a 1.8.0 run reported 7.62. Install exactly the pinned versions.
 
 **Per-task estimates** (validation week, where performed):
 
@@ -110,7 +125,8 @@ Reproducibility: everything is closed-form (least squares, medians). `python run
 | quick_damage_repair | 71 | 68.6 | 68.6 | 54.1 to 79.5 | damage reported +17.9, SUV +5.4 |
 | tyre_check | 29 | 26.1 | 26.1 | 17.9 to 45.3 | staff 2: -13, staff 3: -27 (vs one-person branch about 45 min) |
 
-**Queue wait** (median, minutes) grows with the rush:
+**Queue wait in the data** (train, median minutes) grows with how many cars came in recently. This is what the boosted
+model picks up, together with the predicted work of those cars:
 - one-person branch: 1 → 12 → 23 → 33 → 44 min for 1 to 5 cars in the last 30 min;
 - two-person branch: 1 → 1 → 7 → 12 → 17 min;
 - three-person branch: 1 → 1 → 1 → 4 → 9 min;
@@ -118,17 +134,18 @@ Reproducibility: everything is closed-form (least squares, medians). `python run
   Monday before work starts.
 
 **Limits, honestly:**
-- Errors by day of the validation week: Mon to Thu 6 to 10 min, Fri 17 min, Sat 22 min, Sun 13 min. Saturday weighs
-  most because a car that misses the 16:00 closing at a centre branch waits until Monday (about 2,400 min instead of
-  about 750 on a weekday).
-- Total MAE is still dominated by about 20 cars that arrive shortly before closing. On train, even the best possible
-  call from (staff, spare time, rush) is right only about 97 % of the time near closing (we reach 96 %); the rest is
-  genuine randomness in the wait.
-- The classifier is not a win everywhere: on the later train weeks it made Saturdays slightly worse (11.2 → 13.1 and
-  9.7 → 11.0 min) while improving the overall MAE; on the validation week Saturday improved (26.8 → 21.8 min). The question there is whether they still
-  finish today or wait until tomorrow, a jump of about 750 min. The queue wait is partly random (its own MAE is about
-  7 min), so these cases cannot be called perfectly. That is why we reach "good" (< 15) but not "strong" (< 5) on the
-  total.
+- Errors by day of the validation week (full model): Mon to Fri 3.5 to 8 min, Sun 3.7 min, but **Saturday 19.5 min**.
+  Two Saturday cars at centre branches cause most of that:
+  - STR 14:59 was predicted ready at about 45 min but was ready on Monday (2,434 min);
+  - BER 15:19 was predicted to wait until Monday but was ready in 40 min.
+
+  A car that misses the 16:00 closing waits until Monday (about 2,400 min instead of about 750 on a weekday), so a
+  single wrong call there is very expensive. On the later train weeks Saturday is fine (3.8 to 6.8 min).
+- The wait is partly random, so calls right at closing time cannot all be right. That is why the total reaches "good"
+  (< 15) but not "strong" (< 5).
+- The learned wait is a *correction*, not a pure physical queue: it also absorbs errors in the work estimate (in about
+  9 % of cars it is slightly negative, at most -3.7 min). The total is floored at the predicted work time, so no car is
+  ever ready before its own tasks are done.
 - The two rare tasks have few labelled examples (71 and 29). Their effects are cross-checked against train.csv:
   one-person branches imply about 46 min for tyre checks and about 66 min for repairs, consistent with validation.
 - The task models are learned from one week. If staffing or opening hours change, `branch_data.csv` carries that
@@ -138,7 +155,7 @@ Reproducibility: everything is closed-form (least squares, medians). `python run
 ```
 cd Project_6
 python3 -m venv .venv && . .venv/bin/activate    # Python 3.11+ (tested with 3.14)
-pip install -r requirements.txt                  # numpy, pandas only
+pip install -r requirements.txt                  # numpy, pandas, scikit-learn (pinned versions)
 cd starter
 python run.py --repeat                           # fit + predict validation, checks two runs are identical
 python evaluate.py predictions.csv ../data/validation_labels.csv --task-truth ../data/validation_labels.csv \
