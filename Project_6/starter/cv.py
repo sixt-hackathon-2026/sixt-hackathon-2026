@@ -21,8 +21,10 @@ preds = []
 for day in range(7):
     keep = task_data.return_ts.dt.dayofweek != day
     model = S.fit(train, branches, task_data=task_data[keep])
-    part = val[val.return_ts.dt.dayofweek == day]
-    preds.append(S.predict(model, part.reset_index(drop=True), branches))
+    # predict the whole week (the key-box queue and the rush count need the neighbouring days' returns),
+    # but only score the day this model has not seen
+    full = S.predict(model, val, branches)
+    preds.append(full[(val.return_ts.dt.dayofweek == day).values])
 pred = pd.concat(preds).set_index("turnaround_id").loc[val.turnaround_id].reset_index()
 res = evaluate(pred, labels, labels, val, labels)
 for k, v in res.items():

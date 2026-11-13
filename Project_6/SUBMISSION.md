@@ -36,6 +36,14 @@ observed total. Two cases:
   at the same branch in the last 30 minutes. The median minimises absolute error, and because the elapsed time is
   monotone in the wait it also makes the right "finished before closing or not" call on average.
 
+**Finished today? (cars returned in the last 3 hours before closing):** a car that misses closing jumps by the whole
+closed night (about 750 min on a weekday, about 2,400 min from Saturday 16:00 at a centre branch to Monday). These few
+wrong calls made 45 % of the total error. A small logistic regression, learned on train.csv, estimates the probability
+of not finishing today from the spare time (time left minus work minus typical wait), the staff level and how busy
+the branch is (returns in the last 30 and 90 min). We predict the more likely side (probability > 0.5, the
+MAE-optimal choice). If that means "tomorrow", the work runs past closing by the typical overrun learned from train
+(22 min). Weekday dummies were tested and add nothing.
+
 Assumptions and choices:
 - **Season is not used.** Train runs Jul to Sep, validation is the first week of October, and test is the three weeks
   after. The synthetic data shows no seasonal drift: weather mix, dirt scores and the special-cleaning share are flat
@@ -56,7 +64,14 @@ Assumptions and choices:
 | Baseline (OLS of total on task flags) | open | local, numpy | total MAE 99, WAPE 0.55 | < 1 s total | no |
 | Structure + ridge per task + median queue wait by (staff, hour, weekday) | open | local, numpy | total MAE 14.6, WAPE 0.077, per-task MAE mean 3.35 | about 1 s total | no, rare tasks too shrunk |
 | Same, queue wait by (staff, weekday, rush), rare tasks tuned | open | local, numpy | total MAE 14.7, median AE 3.4, WAPE 0.075, per-task MAE mean 2.67 | about 1 s total | no |
-| Same + key-box queue rule (12 min per car ahead) | open | local, numpy | **total MAE 14.0, median AE 3.3, WAPE 0.075, per-task MAE mean 2.67** | about 1 s total | **yes** |
+| Same + key-box queue rule (12 min per car ahead) | open | local, numpy | total MAE 13.3, median AE 3.2, WAPE 0.075, per-task MAE mean 2.67 | about 1 s total | no |
+| Same + "finished today?" logistic classifier near closing | open | local, numpy | **total MAE 12.3, median AE 3.2, WAPE 0.075, per-task MAE mean 2.67** | about 2 s total | **yes** |
+
+The classifier was also checked on later train weeks it did not see (fit on weeks before the cut, score after):
+total MAE 12.7 → 12.4 (cut 25 Aug) and 12.4 → 12.0 (cut 8 Sep).
+
+Earlier versions of `cv.py` predicted each day on its own, which hid the Saturday key-box cars from Sunday's queue
+count. It now predicts the whole week and scores only the held-out day; the numbers above use the corrected version.
 
 Also tried and dropped:
 - a fluid "backlog" queue simulation (worse than the rush count);
@@ -71,8 +86,8 @@ The quantile of the wait was checked on later train weeks: median (τ = 0.5 to 0
 
 | Metric | Baseline | Ours (leave-one-day-out) | README "strong" |
 | --- | --- | --- | --- |
-| Total MAE (min) | 99 | **14.0** | < 5 |
-| Total median abs. error (min) | | **3.3** | |
+| Total MAE (min) | 99 | **12.3** | < 5 |
+| Total median abs. error (min) | | **3.2** | |
 | Share of totals within 10 min | | **74 %** | |
 | Per-task WAPE | 0.55 | **0.075** | < 0.2 |
 | Per-task MAE mean (macro) | 13.6 | **2.67** | |
@@ -103,10 +118,14 @@ Reproducibility: everything is closed-form (least squares, medians). `python run
   Monday before work starts.
 
 **Limits, honestly:**
-- Errors by day of the validation week: Mon to Thu 6 to 10 min, Fri 18 min, Sat 27 min, Sun 13 min. Saturday weighs
+- Errors by day of the validation week: Mon to Thu 6 to 10 min, Fri 17 min, Sat 22 min, Sun 13 min. Saturday weighs
   most because a car that misses the 16:00 closing at a centre branch waits until Monday (about 2,400 min instead of
   about 750 on a weekday).
-- Total MAE is dominated by about 25 cars that arrive shortly before closing. The question there is whether they still
+- Total MAE is still dominated by about 20 cars that arrive shortly before closing. On train, even the best possible
+  call from (staff, spare time, rush) is right only about 97 % of the time near closing (we reach 96 %); the rest is
+  genuine randomness in the wait.
+- The classifier is not a win everywhere: on the later train weeks it made Saturdays slightly worse (11.2 → 13.1 and
+  9.7 → 11.0 min) while improving the overall MAE; on the validation week Saturday improved (26.8 → 21.8 min). The question there is whether they still
   finish today or wait until tomorrow, a jump of about 750 min. The queue wait is partly random (its own MAE is about
   7 min), so these cases cannot be called perfectly. That is why we reach "good" (< 15) but not "strong" (< 5) on the
   total.

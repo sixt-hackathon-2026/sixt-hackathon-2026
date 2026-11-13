@@ -239,30 +239,113 @@ def _load_validation():
     return v.merge(lab, on="turnaround_id")
 
 
-def fit(train, branches, task_data=None):
-    branch_list = sorted(branches.branch.unique())
-    model = fit_tasks(task_data if task_data is not None else _load_validation(), branches, branch_list)
-    model["queue"] = fit_queue(model, train, branches)
-    return model
+CLOSE_WINDOW = 180  # minutes before closing in which the "finished today?" classifier is used
+USE_CLOSE_CLASSIFIER = True
 
 
-def predict(model, df, branches):
+def _parts(model, df, branches):
+    """Work time, median queue wait and open minutes left today (NaN if returned while closed) per turnaround."""
     hours, staff = _hours(branches)
     x = _base(df, staff)
     d = _task_durations(model, df, x)
     durs = np.column_stack([d[t] * df[t].values for t in TASKS if t != "electric_charging"])
     work = _work_time(durs, d["electric_charging"] * df.electric_charging.values, x._staff.values)
     qm = model["queue"]
-    total = np.empty(len(df))
+    rush = _rush(df)
     ahead = _key_box(df, hours)
-    for i, (b, ts, w, wd, r, a) in enumerate(zip(df.branch, df.return_ts, work, df.weekday, _rush(df), ahead)):
+    q = np.empty(len(df))
+    left = np.full(len(df), np.nan)
+    for i, (b, ts, wd, r, a) in enumerate(zip(df.branch, df.return_ts, df.weekday, rush, ahead)):
         k = staff[b]
         if a >= 0:
-            q = qm["key_box_min_per_car"] * a
-        else:
-            q = qm["fine"].get((k, wd, r), qm["mid"].get((k, r), qm["coarse"].get(k, 0.0)))
-        total[i] = _elapsed(hours, b, ts, w + q)
+            q[i] = qm["key_box_min_per_car"] * a
+            continue
+        q[i] = qm["fine"].get((k, wd, r), qm["mid"].get((k, r), qm["coarse"].get(k, 0.0)))
+        h = hours.get((b, ts.dayofweek))
+        m = ts.hour * 60 + ts.minute + ts.second / 60
+        if h is not None and h[0] <= m < h[1]:
+            left[i] = h[1] - m
+    return {"d": d, "work": work, "q": q, "left": left, "rush": rush, "staff": x._staff.values,
+            "rush90": _rush_window(df, 90), "weekday": df.weekday.values}
+
+
+def _rush_window(df, window):
+    t = (df.return_ts - pd.Timestamp("2000-01-01")).dt.total_seconds().values / 60
+    out = np.zeros(len(df))
+    for _, idx in df.groupby("branch").indices.items():
+        order = idx[np.argsort(t[idx], kind="stable")]
+        tt = t[order]
+        out[order] = np.searchsorted(tt, tt, "right") - np.searchsorted(tt, tt - window, "left")
+    return out
+
+
+def _close_X(p, sel):
+    """Features for P(not finished before closing): spare time after work + typical wait, per staff level, and how
+    busy the branch is (returns in the last 30 / 90 min). Weekday dummies were tested and add nothing."""
+    spare = (p["left"] - p["work"] - p["q"])[sel] / 30
+    cols = [np.ones(sel.sum())]
+    for k in (1, 2, 3):
+        mk = (p["staff"][sel] == k).astype(float)
+        cols += [mk, mk * spare, mk * p["rush"][sel], mk * p["rush90"][sel] / 3]
+    return np.column_stack(cols)
+
+
+def _logit(A, y, lam=1.0, iters=50):
+    """Ridge-penalised logistic regression by Newton steps (deterministic)."""
+    w = np.zeros(A.shape[1])
+    for _ in range(iters):
+        pr = 1 / (1 + np.exp(-np.clip(A @ w, -30, 30)))
+        H = A.T @ (A * (pr * (1 - pr) + 1e-9)[:, None]) + lam * np.eye(A.shape[1])
+        w -= np.linalg.solve(H, A.T @ (pr - y) + lam * w)
+    return w
+
+
+def fit_close(model, train, branches):
+    """Learn on train.csv whether a car returned shortly before closing is still ready today, and how far the work
+    typically runs past closing when it is not (in open minutes of the next opening)."""
+    p = _parts(model, train, branches)
+    sel = ~np.isnan(p["left"]) & (p["left"] < CLOSE_WINDOW)
+    y = (train.total_turnaround_min.values[sel] > p["left"][sel]).astype(float)
+    w = _logit(_close_X(p, sel), y)
+    # Overrun past closing for cars that did not make it: elapsed minus the closed gap, from the observed totals.
+    hours, _ = _hours(branches)
+    over_idx = np.flatnonzero(sel)[y == 1]
+    overrun = []
+    for i in over_idx:
+        b, ts, tot, L = train.branch.iat[i], train.return_ts.iat[i], train.total_turnaround_min.iat[i], p["left"][i]
+        gap = _elapsed(hours, b, ts, L + 1e-6) - L  # closed minutes skipped when work runs past closing
+        overrun.append(tot - L - gap)
+    return {"w": w, "overrun": float(np.median(overrun)) if overrun else 10.0}
+
+
+def fit(train, branches, task_data=None):
+    branch_list = sorted(branches.branch.unique())
+    model = fit_tasks(task_data if task_data is not None else _load_validation(), branches, branch_list)
+    model["queue"] = fit_queue(model, train, branches)
+    if USE_CLOSE_CLASSIFIER:
+        model["close"] = fit_close(model, train, branches)
+    return model
+
+
+def predict(model, df, branches):
+    hours, _ = _hours(branches)
+    p = _parts(model, df, branches)
+    open_work = p["work"] + p["q"]  # open minutes from return until ready
+    if "close" in model:
+        sel = ~np.isnan(p["left"]) & (p["left"] < CLOSE_WINDOW)
+        if sel.any():
+            prob = 1 / (1 + np.exp(-np.clip(_close_X(p, sel) @ model["close"]["w"], -30, 30)))
+            idx = np.flatnonzero(sel)
+            L = p["left"][idx]
+            late = prob > 0.5            # MAE-optimal: the more likely side of the jump
+            ow = open_work[idx]
+            # classifier says "not today" but the plain estimate fits: run past closing by the typical overrun
+            ow = np.where(late & (ow <= L), L + model["close"]["overrun"], ow)
+            # classifier says "today" but the plain estimate does not fit: ready at closing (never below the work)
+            ow = np.where(~late & (ow > L), np.maximum(np.minimum(ow, L), p["work"][idx]), ow)
+            open_work[idx] = ow
+    total = np.array([_elapsed(hours, b, ts, w) for b, ts, w in zip(df.branch, df.return_ts, open_work)])
     out = pd.DataFrame({"turnaround_id": df.turnaround_id.values, "total_turnaround_min": total})
     for t in TASKS:
-        out[f"dur_{t}"] = d[t] * df[t].values
+        out[f"dur_{t}"] = p["d"][t] * df[t].values
     return out
