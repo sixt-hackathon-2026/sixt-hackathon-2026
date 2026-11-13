@@ -1,8 +1,9 @@
 # Data description
 
 `train.csv` (with `total_turnaround_min`), `validation.csv` (without it) and `validation_labels.csv` (the total and the true
-duration of each task for the validation turnarounds). One row per returned vehicle. Validation comes after the training
-period; the hidden test set comes after validation.
+duration of each task for the validation turnarounds). One row per returned vehicle. `test.csv` has the same columns as
+`validation.csv`, for the three weeks after validation; its labels are kept by the organizers. Validation comes after the training
+period; test comes after validation.
 
 | Column | Meaning |
 |---|---|

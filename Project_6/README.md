@@ -22,10 +22,11 @@ times, so look at the data closely.
 - `validation.csv` + `validation_labels.csv`: one later full week, Monday to Sunday (about 2,800 turnarounds) **with the true total and the
   true duration of each task**, so you can check your estimates. Use it however you like.
   Every turnaround has interior cleaning and exactly one exterior cleaning, so the totals alone barely separate the two.
+- `test.csv`: the three weeks after the validation week (about 8,400 turnarounds), **without** totals or task durations.
+  You submit predictions for it; we keep the labels.
 - `branch_data.csv`: branch opening hours and staff.
-We run your code on a **hidden test set** from the three weeks after the validation week.
 
-## How results are judged (on the hidden test set)
+## How results are judged (on `test.csv`, against labels we keep)
 1. **Per-task duration error (main).** Your estimate for each task performed, compared to the true duration: MAE per task, the
    mean across tasks (every task counts equally, rare ones too), and the weighted error (WAPE: total absolute error divided by
    total true task minutes). `evaluate.py` also prints a skill score per task against always guessing the task's average duration
@@ -34,7 +35,7 @@ We run your code on a **hidden test set** from the three weeks after the validat
 3. **Plausibility and feature importance.** No negative or impossible durations; effects a branch manager would believe.
 4. **Reproducibility and clarity.** Our run must give the same values as yours; someone else should be able to follow your approach.
 
-## What good looks like (total MAE and per-task WAPE, on validation and on the hidden test)
+## What good looks like (total MAE and per-task WAPE, on validation and on the test set)
 - **Baseline** (`solution.py` as given): total MAE about 99 min, WAPE about 0.55. It is a floor, not a target: it is worse than
   guessing each task's average duration.
 - **Good:** total MAE under 15 min.
@@ -42,6 +43,9 @@ We run your code on a **hidden test set** from the three weeks after the validat
 Reproducibility and plausibility are required for any of these to count.
 
 ## What you submit
+- `submission/test_predictions.csv`: your predictions for `test.csv`, made with
+  `mkdir -p ../submission && python run.py --test ../data/test.csv --out ../submission/test_predictions.csv` (from `starter/`).
+  We re-run your code and check it reproduces this file (`run.py --compare`); if it does not, the submission does not count.
 - `solution.py` in `starter/`, with `fit(train, branches)` and `predict(model, df, branches)` (see the template).
 - `SUBMISSION.md`: approach, results on validation, feature importance, how to run, per-task estimate table.
 - Either a 1-minute demo (`submission/demo.mp4`, under 50 MB) or up to 5 slides (`submission/slides.pdf`).
@@ -52,7 +56,8 @@ Your predictions must include a `dur_<task>` column for every task: a total with
 - Your code must be **deterministic**: fix random seeds; two runs must give identical values. We re-run it and compare.
 - Must run in under 10 minutes on a laptop, no network, nothing outside `starter/` and `data/` except `requirements.txt`.
 - No hard-coded labels or durations that you did not learn from the data files.
-- The hidden test set is not in this repo. Do not try to obtain it.
+- The test labels are not in this repo. Do not try to obtain them, and do not tune by hand on `test.csv`: fit only on `train.csv`
+  and `validation*.csv`.
 
 ## Setup (before the day)
 `git`, Python 3.11+, a virtual environment, `bash setup.sh` (or `pip install -r requirements.txt`), your own LLM coding agent (none is
