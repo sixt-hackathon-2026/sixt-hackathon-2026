@@ -28,9 +28,13 @@ manager would expect (table below). Predictions are clipped to the range seen in
 or implausible.
 
 **Queue wait:** for every train turnaround we back out the queue wait that makes the structure above match the
-observed total. Prediction = median wait by (staff level, weekday, *rush*), where rush = number of cars returned at
-the same branch in the last 30 minutes. The median minimises absolute error, and because the elapsed time is monotone
-in the wait it also makes the right "finished before closing or not" call on average.
+observed total. Two cases:
+- **Key-box cars** (returned while closed; only BER/NUE/STR on Saturday evening and Sunday) are worked off one by one
+  at opening: wait = **12.0 min × cars ahead in the key box** (train: correlation 0.998, residual MAE 2.4 min). Walk-in
+  customers on Monday morning do *not* queue behind this backlog (checked), so the two cases are kept apart.
+- **Cars returned while open:** median wait by (staff level, weekday, *rush*), where rush = number of cars returned
+  at the same branch in the last 30 minutes. The median minimises absolute error, and because the elapsed time is
+  monotone in the wait it also makes the right "finished before closing or not" call on average.
 
 Assumptions and choices:
 - **Season is not used.** Train runs Jul to Sep, validation is the first week of October, and test is the three weeks
@@ -38,15 +42,21 @@ Assumptions and choices:
   across months. Season effects in real life should show up through `exterior_dirt` and `weather`, which we use.
 - **Weather is used only where it is plausible:** exterior cleaning (rain about +1.5 min on a normal wash) and nowhere
   else. Weather did not help interior work, refuelling or the rare tasks in cross-validation.
-- A few clustered disruptions (for example around the 3 October holiday) are excluded when learning the typical queue
-  wait.
+- **Holidays are not used.** Neither 15 August (Bavaria: MUC, NUE) nor 3 October (nationwide) differs from other
+  Fridays in volume or wait. The test weeks (6 to 26 October) contain no holiday in any branch's state.
+- **Weekdays act only through volume and opening hours.** Friday has the most returns (about 530 vs 320 on Monday),
+  but at the same rush the wait is the same Monday to Saturday. Task times do not depend on the weekday (model
+  residuals by weekday below 0.5 min). Saturday's early closing and Sunday closure are handled by the calendar and the
+  key-box rule.
+- Rare waits above 4 hours are excluded when learning the typical walk-in wait.
 
 ## Models and why
 | Model | Open-weight or closed | Where it runs | Main metric(s), leave-one-day-out on validation | Cost and time per item | Chosen? |
 | --- | --- | --- | --- | --- | --- |
 | Baseline (OLS of total on task flags) | open | local, numpy | total MAE 99, WAPE 0.55 | < 1 s total | no |
 | Structure + ridge per task + median queue wait by (staff, hour, weekday) | open | local, numpy | total MAE 14.6, WAPE 0.077, per-task MAE mean 3.35 | about 1 s total | no, rare tasks too shrunk |
-| Same, queue wait by (staff, weekday, rush), rare tasks tuned | open | local, numpy | **total MAE 14.7, median AE 3.4, WAPE 0.075, per-task MAE mean 2.67** | about 1 s total | **yes** |
+| Same, queue wait by (staff, weekday, rush), rare tasks tuned | open | local, numpy | total MAE 14.7, median AE 3.4, WAPE 0.075, per-task MAE mean 2.67 | about 1 s total | no |
+| Same + key-box queue rule (12 min per car ahead) | open | local, numpy | **total MAE 14.0, median AE 3.3, WAPE 0.075, per-task MAE mean 2.67** | about 1 s total | **yes** |
 
 Also tried and dropped:
 - a fluid "backlog" queue simulation (worse than the rush count);
@@ -61,8 +71,8 @@ The quantile of the wait was checked on later train weeks: median (τ = 0.5 to 0
 
 | Metric | Baseline | Ours (leave-one-day-out) | README "strong" |
 | --- | --- | --- | --- |
-| Total MAE (min) | 99 | **14.7** | < 5 |
-| Total median abs. error (min) | | **3.4** | |
+| Total MAE (min) | 99 | **14.0** | < 5 |
+| Total median abs. error (min) | | **3.3** | |
 | Share of totals within 10 min | | **74 %** | |
 | Per-task WAPE | 0.55 | **0.075** | < 0.2 |
 | Per-task MAE mean (macro) | 13.6 | **2.67** | |
@@ -88,10 +98,15 @@ Reproducibility: everything is closed-form (least squares, medians). `python run
 **Queue wait** (median, minutes) grows with the rush:
 - one-person branch: 1 → 12 → 23 → 33 → 44 min for 1 to 5 cars in the last 30 min;
 - two-person branch: 1 → 1 → 7 → 12 → 17 min;
-- three-person branch: 1 → 1 → 1 → 4 → 9 min.
+- three-person branch: 1 → 1 → 1 → 4 → 9 min;
+- key-box cars: 12.0 min per car ahead, so the 12th Sunday drop-off at a one-person branch waits about 2 h 10 min on
+  Monday before work starts.
 
 **Limits, honestly:**
-- Total MAE is dominated by about 30 cars that arrive shortly before closing. The question there is whether they still
+- Errors by day of the validation week: Mon to Thu 6 to 10 min, Fri 18 min, Sat 27 min, Sun 13 min. Saturday weighs
+  most because a car that misses the 16:00 closing at a centre branch waits until Monday (about 2,400 min instead of
+  about 750 on a weekday).
+- Total MAE is dominated by about 25 cars that arrive shortly before closing. The question there is whether they still
   finish today or wait until tomorrow, a jump of about 750 min. The queue wait is partly random (its own MAE is about
   7 min), so these cases cannot be called perfectly. That is why we reach "good" (< 15) but not "strong" (< 5) on the
   total.

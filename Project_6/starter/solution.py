@@ -190,20 +190,46 @@ def _rush(df):
     return np.minimum(out, RUSH_CAP).astype(int)
 
 
+def _key_box(df, hours):
+    """For cars returned while the branch is closed (key drop box): their position in the drop-box queue,
+    i.e. how many drop-box cars for the same opening came in before them. -1 for cars returned while open."""
+    wait0 = np.array([_elapsed(hours, b, ts, 0.0) for b, ts in zip(df.branch, df.return_ts)])
+    ahead = np.full(len(df), -1)
+    closed = wait0 > 0
+    if closed.any():
+        k = pd.DataFrame({"branch": df.branch.values[closed],
+                          "open_at": (df.return_ts + pd.to_timedelta(wait0, unit="m")).values[closed],
+                          "ts": df.return_ts.values[closed], "id": df.turnaround_id.values[closed]},
+                         index=np.flatnonzero(closed))
+        k = k.sort_values(["branch", "open_at", "ts", "id"], kind="stable")
+        ahead[k.index.values] = k.groupby(["branch", "open_at"]).cumcount().values
+    return ahead
+
+
 def fit_queue(model, train, branches):
-    """Queue wait = median by (staff level, weekday, rush) with fall-back to (staff, rush) and staff level.
+    """Two kinds of queue wait.
+
+    Drop-box cars (returned while closed; only the one-person branches over the weekend): they are worked off one by
+    one at opening, so wait = slope * cars ahead in the drop box (train: 12.0 min per car, corr 0.998).
+
+    Cars returned while open: median by (staff level, weekday, rush) with fall-back to (staff, rush) and staff level.
     The median is the MAE-optimal guess for a skewed wait with many zeros; since the elapsed time is monotone in the
-    wait, it also gives the median total (incl. the 'does it still finish before closing?' decision)."""
-    _, staff = _hours(branches)
+    wait, it also gives the median total (incl. the 'does it still finish before closing?' decision).
+    Walk-in cars do not queue behind the drop-box backlog (checked on Monday mornings), so the two are separate."""
+    hours, staff = _hours(branches)
     q = _queue_wait_targets(model, train, branches)
+    ahead = _key_box(train, hours)
     g = pd.DataFrame({"staff": train.branch.map(staff).values, "wd": train.weekday.values,
-                      "rush": _rush(train), "q": q})
-    g = g[g.q < 240]  # rare disruptions (e.g. a holiday) would only distort the typical wait
+                      "rush": _rush(train), "q": q, "ahead": ahead})
+    kb = g[g.ahead >= 0]
+    slope = float((kb.ahead * kb.q).sum() / max((kb.ahead ** 2).sum(), 1)) if len(kb) else 0.0
+    g = g[(g.ahead < 0) & (g.q < 240)]  # rare disruptions would only distort the typical wait
     fine = g.groupby(["staff", "wd", "rush"]).q.agg(["median", "size"])
     mid = g.groupby(["staff", "rush"]).q.agg(["median", "size"])
     return {"fine": fine[fine["size"] >= 15]["median"].to_dict(),
             "mid": mid[mid["size"] >= 15]["median"].to_dict(),
-            "coarse": g.groupby("staff").q.median().to_dict()}
+            "coarse": g.groupby("staff").q.median().to_dict(),
+            "key_box_min_per_car": slope}
 
 
 def _load_validation():
@@ -228,9 +254,13 @@ def predict(model, df, branches):
     work = _work_time(durs, d["electric_charging"] * df.electric_charging.values, x._staff.values)
     qm = model["queue"]
     total = np.empty(len(df))
-    for i, (b, ts, w, wd, r) in enumerate(zip(df.branch, df.return_ts, work, df.weekday, _rush(df))):
+    ahead = _key_box(df, hours)
+    for i, (b, ts, w, wd, r, a) in enumerate(zip(df.branch, df.return_ts, work, df.weekday, _rush(df), ahead)):
         k = staff[b]
-        q = qm["fine"].get((k, wd, r), qm["mid"].get((k, r), qm["coarse"].get(k, 0.0)))
+        if a >= 0:
+            q = qm["key_box_min_per_car"] * a
+        else:
+            q = qm["fine"].get((k, wd, r), qm["mid"].get((k, r), qm["coarse"].get(k, 0.0)))
         total[i] = _elapsed(hours, b, ts, w + q)
     out = pd.DataFrame({"turnaround_id": df.turnaround_id.values, "total_turnaround_min": total})
     for t in TASKS:
