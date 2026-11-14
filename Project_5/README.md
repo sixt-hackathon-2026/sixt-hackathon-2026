@@ -1,5 +1,9 @@
 # Project 5: SIXT + TUM
 
+**[Provisional results](results/README.md)** | **[Results spreadsheet](results/RESULTS.xlsx?raw=true)** | **[Team solutions](solutions/README.md)**
+
+The results include the approved small-model bonuses for Two Braincells and SK². Presentation/demo marks remain pending. Solution archives identify the exact team commits reviewed; they are team submissions, not organizer reference answers.
+
 **Stage 2 (final dataset) is available now - 13 November 2026.**
 
 **[Download the Stage 2 student dataset ZIP](releases/problem7_student_final.zip?raw=true)** | [Stage 2 SHA-256 checksum](releases/problem7_student_final.zip.sha256)

@@ -1,0 +1,391 @@
+{
+  "team": "Two Braincells",
+  "repository": "https://github.com/preranaprakashnaik-alt/sixt-hackathon-2026",
+  "commit": "ebcad8346ef8e2b57e9c27405f364a9dd2850cf7",
+  "source_url": "https://github.com/preranaprakashnaik-alt/sixt-hackathon-2026/tree/ebcad8346ef8e2b57e9c27405f364a9dd2850cf7/Project_5",
+  "snapshot_kind": "Reviewed submission snapshot; not a claim about later commits or an official deadline lock",
+  "canonical_answer_files": {
+    "stage1": "Project_5/public_answers.csv",
+    "stage2": "Project_5/final_answers.csv"
+  },
+  "license_file": "LICENSE",
+  "preservation": "Included source files are byte-for-byte copies of their Git blobs. No team program was executed or edited.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "Project_5/MODEL_DECLARATION.csv",
+      "bytes": 2183,
+      "sha256": "b857e6d2f70d267cc94f5a043d99205e1bf1ae6412ee365636ea0169535df12d",
+      "git_blob": "5246a7a089f4973df6e9f929a566a16c95b3ad53"
+    },
+    {
+      "path": "Project_5/SUBMISSION.md",
+      "bytes": 21491,
+      "sha256": "7a2180780a544d604983a2100b6b51ac4ba0f4a80a754e47b437826ec34a603a",
+      "git_blob": "0f2df270cf203d1861d41ae4015631f9933676c5"
+    },
+    {
+      "path": "Project_5/evidence/gemma_4_31b.md",
+      "bytes": 2209,
+      "sha256": "6a2111a292bbb4e51ab4ee54099f9516dee22e750246914a1f79d6bef4b0d45e",
+      "git_blob": "83914d108e0a7e940ec814dff3cde8face252b65"
+    },
+    {
+      "path": "Project_5/final_answers.csv",
+      "bytes": 2572,
+      "sha256": "9f9763cf1b8abfd63d560faef8ef897be269a1060f8eacd64d1e77be579dea52",
+      "git_blob": "f37908ea84c6344a0f0c8dc9d50706b5eae0fc05"
+    },
+    {
+      "path": "Project_5/final_answers_report_llm.json",
+      "bytes": 68052,
+      "sha256": "70fa5a548cc348e2cbdd00d956f71c62e3e703aa15a95467288efe0a37416821",
+      "git_blob": "c21011f3370db561e4ad52fe3032fe1a6cfe3a3b"
+    },
+    {
+      "path": "Project_5/logs/fallback_eval_report.json",
+      "bytes": 19076,
+      "sha256": "e3e11893f5db8e1c0269453ca8542d1037c3ce22a521aefcc8b7172005503483",
+      "git_blob": "942ab00788d7c1e7f109db40bf33833b88c56cb9"
+    },
+    {
+      "path": "Project_5/logs/fallback_eval_rerun.json",
+      "bytes": 1314,
+      "sha256": "530d9b422a11a093b1c06b4f6d90b829e8a314bcf16176837662a52ad8197324",
+      "git_blob": "3535d97d992ddb2304c827343765e430a60ebd4e"
+    },
+    {
+      "path": "Project_5/logs/model_usage.csv",
+      "bytes": 68152,
+      "sha256": "58934fe8c3bee809ec895b6034c8eaa113ee4d262e264bb50d2ed01e822e079e",
+      "git_blob": "e176cdacc53822c99720d0f12e4f8778c5cf321e"
+    },
+    {
+      "path": "Project_5/logs/stage2_crosscheck_report.json",
+      "bytes": 8692,
+      "sha256": "19bad9ee2f1b217ec9f1f0437ea9bcaec578496253a4edb9df2da017903ca420",
+      "git_blob": "6759fd72e6a94a7a978160d21107fe8abb6bf8b5"
+    },
+    {
+      "path": "Project_5/pipeline/canonical_schema.json",
+      "bytes": 7881,
+      "sha256": "9ad10559cbf4f25b9cb2dfad8bc454d0964602df4b983144ef03523e1e48816d",
+      "git_blob": "d1884998e6dcadc222d0c7e2d90ce6fa934b08a2"
+    },
+    {
+      "path": "Project_5/pipeline/codegen.py",
+      "bytes": 12158,
+      "sha256": "f6899bbfe83f51cc34e7c95b566e7320a34242a0483023b6cc57c566be530cb2",
+      "git_blob": "28dba6d3b36b9cff6e2421c8215ab731f84b33f1"
+    },
+    {
+      "path": "Project_5/pipeline/data.py",
+      "bytes": 19478,
+      "sha256": "ae5acde53a466781f9307bd27acc75d0bc21fe52f6cf5052b7ef8a3fdd3066d6",
+      "git_blob": "7611c2001212fb2c7adec2d5827248e21b623e9a"
+    },
+    {
+      "path": "Project_5/pipeline/flow.py",
+      "bytes": 7268,
+      "sha256": "426c4dc0c46f99a97907f87ec7d9b196495dfbc1eef251ca372c1e0f2e7ea26b",
+      "git_blob": "4461ddac48195d296d8a379b309f63a507f78356"
+    },
+    {
+      "path": "Project_5/pipeline/hard_opt.py",
+      "bytes": 7130,
+      "sha256": "25f27f1e7135a91904f29906384133e2fe7ac2954addfb54ed1f1fa1419a64dc",
+      "git_blob": "77b935521f579637f7b88db362ede9c3b2ef4936"
+    },
+    {
+      "path": "Project_5/pipeline/recipes.py",
+      "bytes": 32576,
+      "sha256": "ad93aa29324e3c109ee5f63a90c990efe8b67ce4dc8845782064839449a14dea",
+      "git_blob": "99f356501b2bf9046d279e28e5c394ceb639d07c"
+    },
+    {
+      "path": "Project_5/pipeline/requirements.txt",
+      "bytes": 41,
+      "sha256": "a8810b09fd509b4317c5f5b88dae33a1d28f06eef343399bb0ea1d19680006df",
+      "git_blob": "8b629d12b2cf585c0715101eefe3e15a644ef5f1"
+    },
+    {
+      "path": "Project_5/pipeline/router.py",
+      "bytes": 18203,
+      "sha256": "b1b87e6db00340ac76b4ecc7a105b024843bb7c83e8551591e4e6c482cb2791e",
+      "git_blob": "c5362678c1da0be8d773f4dcb03e51156602a62d"
+    },
+    {
+      "path": "Project_5/pipeline/run.py",
+      "bytes": 4222,
+      "sha256": "df4affb00bd245e4d55f9b017a687654e151dc3ac145d3f8dfe0b7f4e01ab6ee",
+      "git_blob": "a4645fc71250bcbc0fb34c238091573ad0a9ee6d"
+    },
+    {
+      "path": "Project_5/pipeline/schema_map.py",
+      "bytes": 5473,
+      "sha256": "bc411afcdbb0029f3fe1c11a8ae9fa0056d677bd2645d7050643958cc3ec1a01",
+      "git_blob": "85dca576e7ee917fcddbdfbece504aa3c0cf37a2"
+    },
+    {
+      "path": "Project_5/pipeline/usage_summary.py",
+      "bytes": 1670,
+      "sha256": "6c4ae44aa1e94d016ece21311df87c29cbfd110ddf28d8a2a04ff5e6c37f67e9",
+      "git_blob": "d422a2c48fad267dafe09b31a890cf9c83fe31e8"
+    },
+    {
+      "path": "Project_5/public_answers.csv",
+      "bytes": 2461,
+      "sha256": "dea0ef9fa52fb624aa1de638ef07d18cc2139a75a44296d4cd0e3aa07b9a19c5",
+      "git_blob": "14e645dab1c0517e8756e9bfd0d9d480f9f86ae7"
+    },
+    {
+      "path": "Project_5/public_answers_report_llm.json",
+      "bytes": 68948,
+      "sha256": "90ff89103d17ca06aeac1a4b0dcad4601d9b1767ba5b938dbe701ee00995b87e",
+      "git_blob": "c256a78dd65c2b9522b6c2a2255f3d7f63510f2a"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/README.md",
+      "bytes": 1811,
+      "sha256": "c73945accf430e13340a23313c21a1d1b115cbf22c8fc396b29d54072da71374",
+      "git_blob": "6d3686233f46666cbdde3a7e74b1b5b06e4f9921"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/method_notes_qwen_3b.md",
+      "bytes": 9778,
+      "sha256": "f668c1cb528a82abd16532f1117fe7ae8ac084bc6838bec5199d300fc58d315f",
+      "git_blob": "1082059e889188e5d39efa94f13f872787329294"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/README.md",
+      "bytes": 1751,
+      "sha256": "778d9c98b8b4cfe9760401f31b4d9ab4de106779ec9e7e39041ccd5535a8abc0",
+      "git_blob": "0a7147af46dad064c977a81a43a3fb37b3cd507f"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/canonical_schema.json",
+      "bytes": 7881,
+      "sha256": "9ad10559cbf4f25b9cb2dfad8bc454d0964602df4b983144ef03523e1e48816d",
+      "git_blob": "d1884998e6dcadc222d0c7e2d90ce6fa934b08a2"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/codegen.py",
+      "bytes": 11897,
+      "sha256": "c1ac36fdbdcbafcd5c4cb484a35c1b0c6950db7d5c2b7414a922816a254d2770",
+      "git_blob": "19b7808159e2fb576c70cfec585f72847c49a475"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/data.py",
+      "bytes": 19289,
+      "sha256": "c561dd5c611a760c7284bf1e18260180882d384add16b3441c86c665414c303f",
+      "git_blob": "653129f9b9a226996bb23c3989fb4d92661fd276"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/flow.py",
+      "bytes": 7268,
+      "sha256": "426c4dc0c46f99a97907f87ec7d9b196495dfbc1eef251ca372c1e0f2e7ea26b",
+      "git_blob": "4461ddac48195d296d8a379b309f63a507f78356"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/hard_opt.py",
+      "bytes": 7130,
+      "sha256": "25f27f1e7135a91904f29906384133e2fe7ac2954addfb54ed1f1fa1419a64dc",
+      "git_blob": "77b935521f579637f7b88db362ede9c3b2ef4936"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/recipes.py",
+      "bytes": 28323,
+      "sha256": "5d8cdaec93995e68c3c8f97c31c4220bc25d234563723e9e9364180874795f33",
+      "git_blob": "ccac4e629381b3ba9f35d1a7c41cbaad7c59a5bf"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/requirements.txt",
+      "bytes": 36,
+      "sha256": "6522473db2f28e763ce310e708b4a4cdbae0114bf268a64a6b7d11f919f3cfb7",
+      "git_blob": "a8cb89db6801f61e8c3dd1da703ac1421f9075f9"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/router.py",
+      "bytes": 18235,
+      "sha256": "48a7be305c80ce54808ab14d8c80df9d76726ad9683d5fcbb9cf6b1a4a1b1f5e",
+      "git_blob": "abefb705a85647a0b8e8fb9c11caceba062aced5"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/run.py",
+      "bytes": 5157,
+      "sha256": "7a7c17d8c098e378119019e5422940cf6abda847aefa03cac9f18e27cf4a0a61",
+      "git_blob": "678f3282012fca338688859d9c302964374b09cf"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/schema_map.py",
+      "bytes": 6504,
+      "sha256": "a5dab29ac07e71150b05cabbfcf2742ccb171183f377b443af8615dcbc065076",
+      "git_blob": "437eb155a8033fc7f991b30ceadc5f1090df85b7"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/pipeline_qwen_3b/usage_summary.py",
+      "bytes": 1680,
+      "sha256": "f24a818d7788902edbfacd936db0697112de0f3e437df303db3cc9751b103636",
+      "git_blob": "8b076c03f4ac729021383e80dd9432112a19bb47"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/slides_qwen_3b_two_stage.pptx",
+      "bytes": 47279,
+      "sha256": "7c11c9552a27711092563cc0ae15450ff602b5511ece490c5b8d816667cec370",
+      "git_blob": "0046f20db9fd25dd6baa9770ef1ae26ad36b2778"
+    },
+    {
+      "path": "Project_5/qwen_3b_trial/stage1_answers_qwen2.5-coder-3b.csv",
+      "bytes": 2456,
+      "sha256": "fd911ee215b7859074fe42c5e4d901b533c5d6da1b1f1df648ace55d4de324af",
+      "git_blob": "f7c239b08784a1180b2a64e6be2de2f634fe84d1"
+    },
+    {
+      "path": "Project_5/stage2_schema_map.json",
+      "bytes": 2827,
+      "sha256": "b28780eb4963ac841af07222ffe9032490764c4b15a5892a2d25e49b7aff6a1a",
+      "git_blob": "9e0e1f53d88fadb0eeda67685d5c4d389a717874"
+    },
+    {
+      "path": "Project_5/submission/slides.html",
+      "bytes": 10407,
+      "sha256": "431bdcdf55636ee15ca579f5c623e124329958e8caeda079cba32355c33a0939",
+      "git_blob": "a6e568081861f2b68f3df4a35d7d4e06812c9f6c"
+    },
+    {
+      "path": "Project_5/submission/slides.pdf",
+      "bytes": 123863,
+      "sha256": "fc4376289fa1e70c7cd3e46631fa9b9f74e0c40f73e2a271931976ec1575baea",
+      "git_blob": "8c20fc269b5e830876d8d9c16015fb692456beaa"
+    },
+    {
+      "path": "Project_5/validation/drift_test.py",
+      "bytes": 3140,
+      "sha256": "36089eeab1925cbb503d6d860970052b8675708fced33922722811e6407763db",
+      "git_blob": "b9ebbb1473872b39dada4cbea005208c8a208909"
+    },
+    {
+      "path": "Project_5/validation/fallback_eval.py",
+      "bytes": 3597,
+      "sha256": "2a44de91d66157f2914eb65787b9f0ef2a9ef02e70e2746fd53461795edda908",
+      "git_blob": "9a54797bcff27259ca10a82790792373fc80d7e8"
+    },
+    {
+      "path": "Project_5/validation/novel_questions.csv",
+      "bytes": 651,
+      "sha256": "9b10e387395148a0a0a4551885430c6294cedd7a4e446d59b7a4831cc756c384",
+      "git_blob": "66a0b132f3b53523f49c0b17594f789faa07ea3c"
+    },
+    {
+      "path": "Project_5/validation/stage2_crosscheck.py",
+      "bytes": 2650,
+      "sha256": "6b39cc9c8ef7ab3437c8f1f96754cc6c5b6a661d6614841838279a17964a5e4f",
+      "git_blob": "e66397768a2d58eafcfece59e924249e267c881c"
+    },
+    {
+      "path": "Project_5/validation/test_examples.py",
+      "bytes": 1723,
+      "sha256": "8b6b5d3097d1d5d7731ea1b8cabfda4822da82bd1d4b61c5769afc022f86ccf6",
+      "git_blob": "fbfe95e38538bd9ef3fcb2bf692ecf45a8df2e1b"
+    },
+    {
+      "path": "Project_5/validation/toy_examples.py",
+      "bytes": 2694,
+      "sha256": "6362a2faacaa6911a1e19ddd7dadf03c1faba10e276fbed47b59f22a6809930e",
+      "git_blob": "2b6c4288e651ef8f79e4ae0a76dfa9bc220a0542"
+    }
+  ],
+  "excluded_project_files": [
+    {
+      "path": "Project_5/.gitattributes",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/README.md",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/STUDENT_GUIDE.pdf",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/demo_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/revenue_inputs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_policy.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/releases/problem7_student_final.zip",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/releases/problem7_student_final.zip.sha256",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/releases/problem7_student_start.zip",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/releases/problem7_student_start.zip.sha256",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    }
+  ],
+  "notes": [
+    "Challenge datasets, questions, introductory assets and original organizer material are not duplicated in this archive. Obtain both official student releases separately.",
+    "The presence of team-created answer files or validation outputs does not make them organizer reference answers.",
+    "Reports and slide claims are preserved as submitted; later organizer bonus decisions and provisional grades are recorded in the Project 5 results sheet.",
+    "qwen_3b_trial is an explicitly unsubmitted Stage 1 experiment, not the canonical scored answer pair."
+  ]
+}

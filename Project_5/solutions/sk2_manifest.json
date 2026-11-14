@@ -1,0 +1,459 @@
+{
+  "team": "SK²",
+  "repository": "https://github.com/Karen2007/sixt-hackathon-2026",
+  "commit": "7bbefd79487ebefdf5e131cdc0f75230652891b2",
+  "source_url": "https://github.com/Karen2007/sixt-hackathon-2026/tree/7bbefd79487ebefdf5e131cdc0f75230652891b2/Project_5",
+  "snapshot_kind": "Reviewed submission snapshot; not a claim about later commits or an official deadline lock",
+  "canonical_answer_files": {
+    "stage1": "Project_5/public_answers.csv",
+    "stage2": null
+  },
+  "license_file": "LICENSE",
+  "preservation": "Included source files are byte-for-byte copies of their Git blobs. No team program was executed or edited.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "Project_5/MODEL_DECLARATION.csv",
+      "bytes": 1413,
+      "sha256": "6054c25d52004de50833c91175dd4d9ada4d3ac371e7db6427b08ad2b7c4be8c",
+      "git_blob": "69b2a32c9166321fe5fe1e1f1964c642366f3b49"
+    },
+    {
+      "path": "Project_5/PROJECT_BREAKDOWN.md",
+      "bytes": 32067,
+      "sha256": "07fae3e8c4b2aeb156c7b368930b4774319946eb56705a75767f61d4e6bf1890",
+      "git_blob": "cb4ff80a3a95a62280d51abdf59cf1beede5e9c9"
+    },
+    {
+      "path": "Project_5/SUBMISSION.md",
+      "bytes": 7708,
+      "sha256": "91c5405d9bec26f9de46bce445ccaaece925b5f3b0d9903015cbb9fadc09f6d8",
+      "git_blob": "9e18c4a49ec2b95126d0fb06221c5096180b0f66"
+    },
+    {
+      "path": "Project_5/evidence/README.md",
+      "bytes": 1840,
+      "sha256": "bd0851602f36ad297ed8d62d161ac7a2d347b5c746828cc0523d93ef58bc5174",
+      "git_blob": "228283f946201163875dd858907244c0f2c4ddd5"
+    },
+    {
+      "path": "Project_5/evidence/hf_metadata_Qwen2.5-Coder-7B-Instruct-GGUF.json",
+      "bytes": 6995,
+      "sha256": "0721d1d3a534db56b80ae2cdb8de1e7dae859830935803970e15db0292647b3d",
+      "git_blob": "939ec9f49b523be0b1ff9b19d32c424938a03206"
+    },
+    {
+      "path": "Project_5/evidence/hf_metadata_Qwen2.5-Coder-7B-Instruct.json",
+      "bytes": 8111,
+      "sha256": "3add509afff460ca04d0c254f2def751b7a539ed86650cd42d7ca6b39c60954c",
+      "git_blob": "9f3ef0687f94afe4432ecdfb04d37ad0bab33683"
+    },
+    {
+      "path": "Project_5/evidence/model_file_sha256.txt",
+      "bytes": 123,
+      "sha256": "0aded9e2da1214fb24f806136d64b813341368195708b072ba0a217561d63718",
+      "git_blob": "9c56a9c442bc8037007e84fdef68ec215976c0c0"
+    },
+    {
+      "path": "Project_5/evidence/model_usage_sanitised.csv",
+      "bytes": 121705,
+      "sha256": "bfdd53d033af170350eb547b03e5907328e585188b8f4a94bce82eeb65413ef4",
+      "git_blob": "b5a9b07f6b1d061ddd269ce78d9e170b8db52907"
+    },
+    {
+      "path": "Project_5/evidence/usage_summary.json",
+      "bytes": 1810,
+      "sha256": "01167fa4db088cdfbaba61b4f29060ec998f6dfc22bf0d541ebde30e22b3e755",
+      "git_blob": "480a50ec790bf79c80314f705bf9af1648d2bd3f"
+    },
+    {
+      "path": "Project_5/outputs/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "Project_5/outputs/company_answers_model_routed.csv",
+      "bytes": 10430,
+      "sha256": "115aec93c1c2e055755583793b66eac11e46e1f5065069e9629c165de6bc1f7f",
+      "git_blob": "5ad4086a7615d93988b63c6c8ffd163e0d9e046c"
+    },
+    {
+      "path": "Project_5/outputs/company_answers_model_routed_before_constraints.csv",
+      "bytes": 9296,
+      "sha256": "965e29d83cbeb64668d14e39bc6cb17162d119950c9b1379c69c921202f42e05",
+      "git_blob": "643d734e577b83fdfc88fa6804c8c210b28d6d26"
+    },
+    {
+      "path": "Project_5/outputs/company_answers_model_routed_superseded_leaky_examples.csv",
+      "bytes": 9346,
+      "sha256": "ece1c14b9deb80614da127bb7b87d5c0a8c9c0522bd4bdb513d94523910f5906",
+      "git_blob": "0bb3d38cae660d008471409c0fd26ba944868fa5"
+    },
+    {
+      "path": "Project_5/outputs/company_answers_model_routed_typed_leaky_examples.csv",
+      "bytes": 9196,
+      "sha256": "c8d31ec9a8762cdb29e8a19479c871408d3c8a958b5ef84f692717110d95f7bc",
+      "git_blob": "3d9a88d91130c84491565bcfa864105d16a795c3"
+    },
+    {
+      "path": "Project_5/outputs/company_answers_p001_p150.csv",
+      "bytes": 1876,
+      "sha256": "354c3ba2e05c7eb845c61508790ab0ae12ec0df6c293b3f93c14c1a804febb90",
+      "git_blob": "5b388ef158746e7e79fb5085e5310345e93cb582"
+    },
+    {
+      "path": "Project_5/outputs/demo_answers_pred.csv",
+      "bytes": 53,
+      "sha256": "efb197d33d260582193b6556540dc33c3f41aa217e87242fe4ee72a4ac6a7eb5",
+      "git_blob": "97cdd185c01ffccdf74d861f08abe8c74be35db7"
+    },
+    {
+      "path": "Project_5/outputs/flow_answers_p181_p200.csv",
+      "bytes": 275,
+      "sha256": "af5c69488ce8cea9efd7e12c096d6e9594c438eea79ff986d94abeab7c696fdd",
+      "git_blob": "9dde92c0bc8147778020d6b056d6db12427d9be9"
+    },
+    {
+      "path": "Project_5/outputs/optimiser_answers_p151_p180.csv",
+      "bytes": 400,
+      "sha256": "9ba9b708273292b73e3222eee4ae4a60f3243b8df5069a87c176b0e1d7b4e7ff",
+      "git_blob": "d151c8e6bf1f0254f1829f22adf0ed0948215851"
+    },
+    {
+      "path": "Project_5/outputs/routing_metrics.csv",
+      "bytes": 842,
+      "sha256": "1e3716a66eec6266a03a3b9724097f050b7ac4054880fdb78dd2449bb8bffbc9",
+      "git_blob": "c2edae54865935cb3a76105f92173e85e75c3341"
+    },
+    {
+      "path": "Project_5/outputs/routing_metrics_per_function_public.csv",
+      "bytes": 4807,
+      "sha256": "afd8141ea5243cc6581cb85a620ce450ce38f0f747f443040832d617143f8591",
+      "git_blob": "733014d6a2b758fa81d5eba6db54b42512596a98"
+    },
+    {
+      "path": "Project_5/outputs/routing_metrics_per_function_synthetic.csv",
+      "bytes": 5477,
+      "sha256": "3ff9a09f977f0f26b6533ff4458615e8fbf94d09703633aafa8d6ceff78a9a37",
+      "git_blob": "db10b01947fad0615861e5bf51a39fd8a167dac4"
+    },
+    {
+      "path": "Project_5/outputs/routing_synthetic_test.csv",
+      "bytes": 65884,
+      "sha256": "b9e7ed18e4e6eaef274b3c237f323818a5f636d46e7935fa65eeed7c9ebdbe13",
+      "git_blob": "d632602a99c61ba926a53941061e5674ef6dca3c"
+    },
+    {
+      "path": "Project_5/public_answers.csv",
+      "bytes": 2461,
+      "sha256": "dea0ef9fa52fb624aa1de638ef07d18cc2139a75a44296d4cd0e3aa07b9a19c5",
+      "git_blob": "14e645dab1c0517e8756e9bfd0d9d480f9f86ae7"
+    },
+    {
+      "path": "Project_5/report/main.tex",
+      "bytes": 14820,
+      "sha256": "dcda0ee8fbdc65b092dae3224f2f2244590494217b6b07a1f37b0447932aba64",
+      "git_blob": "e4157ffd86d3fd7f8ca0ebe79fe0c91431cfaa57"
+    },
+    {
+      "path": "Project_5/report/references.bib",
+      "bytes": 579,
+      "sha256": "44cca73d8acf1cc609a4ec7ff5ee86721062985736ece710703598ab8eba197d",
+      "git_blob": "1f4a261b95922ceb6f3e99f4c81194410760ea1b"
+    },
+    {
+      "path": "Project_5/requirements.txt",
+      "bytes": 768,
+      "sha256": "6272f4af19a26da6a9fe2f1297bb6d0df2d08e04e99079d571f5300fe8ca765c",
+      "git_blob": "bbed6c3bdfa5e47befe0a60be1cc73e7e2f855ba"
+    },
+    {
+      "path": "Project_5/setup.sh",
+      "bytes": 392,
+      "sha256": "027ffbbea72ec88c62896ec15e41784f19369934e0d140529649632ef7dee60e",
+      "git_blob": "07bc08860c90de048bce3286855603102b16e016"
+    },
+    {
+      "path": "Project_5/src/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "Project_5/src/assemble_final_answers.py",
+      "bytes": 2116,
+      "sha256": "15f822159c70ffb0bf60d65435415d1b9535c7d8f8eebfee6729954e8fff8953",
+      "git_blob": "2d3ab5054c251f84be4e18d9825cb25e842e0588"
+    },
+    {
+      "path": "Project_5/src/assemble_public_answers.py",
+      "bytes": 2381,
+      "sha256": "6ec05ada645406eb3c265ffa5ec9b57984531e77ee496a926bfe7536bcaa6324",
+      "git_blob": "abb69772e9e3f8528d9f9dc85261a934b54c6994"
+    },
+    {
+      "path": "Project_5/src/baseline_router.py",
+      "bytes": 2218,
+      "sha256": "902face5c10515a76bd1cc13ee9f481034702b394b0f0190979c1c50e4b40166",
+      "git_blob": "98027449d5a04fdeaf1187650a0106e86ca79971"
+    },
+    {
+      "path": "Project_5/src/company.py",
+      "bytes": 36702,
+      "sha256": "381ea026c202f661a6fca95d816b0e4756e140a77bf9581b3573d7571e8e6726",
+      "git_blob": "5cb38e1945442585c4118ca93962310ad94d9b7a"
+    },
+    {
+      "path": "Project_5/src/core.py",
+      "bytes": 11278,
+      "sha256": "885a6967b0b6d45c1aed402f2d8323473ef4b303949c78183444ad69fc9e37a0",
+      "git_blob": "3fd53ae8407fcc1cd1dd5320c465bbe15a70bb3e"
+    },
+    {
+      "path": "Project_5/src/crosscheck_sql.py",
+      "bytes": 13510,
+      "sha256": "77f5de0062230d799b753d3c3c7f3d8978adf64457c65f833ade5efdd06990c5",
+      "git_blob": "1faba351e6e97792e06a8954337089ed3feec420"
+    },
+    {
+      "path": "Project_5/src/flow_sim.py",
+      "bytes": 12799,
+      "sha256": "25a2210070be3714262024b3d119f5736b17d4b595d6a3ef62a50a65c29fdcbd",
+      "git_blob": "86ed7db6bbae6c0e2df2c81573f113009ad6606b"
+    },
+    {
+      "path": "Project_5/src/llm_router.py",
+      "bytes": 14155,
+      "sha256": "9adb2b4a44066507cf482cb15417641f6fdc3a2f5649745b421f2f9a1f624ea1",
+      "git_blob": "6d6421afe5c4c74a7333d01243e45ebaff112315"
+    },
+    {
+      "path": "Project_5/src/optimiser.py",
+      "bytes": 11339,
+      "sha256": "a658dabd2763266bb11eadc212e159785b2d7ad6d6d37dbea72e8722445058d1",
+      "git_blob": "2dc27d570ccd5ac9910b829b2adf52785aebe4a0"
+    },
+    {
+      "path": "Project_5/src/pipeline_company.py",
+      "bytes": 8663,
+      "sha256": "09ea75e9f7ac5081965c84c5333c3e86adeee6a7901f4011180dc7b097ab3cc4",
+      "git_blob": "f3676b56b5879ded9db2ce10a708bb7afcf0db58"
+    },
+    {
+      "path": "Project_5/src/practice.py",
+      "bytes": 9977,
+      "sha256": "486c3d2c1d1e4bd83e5217cfe9ec80d5187a0d7864c0e05f8092d6f07af7bede",
+      "git_blob": "616a9241733f9f63627fde57092237bd6a96b252"
+    },
+    {
+      "path": "Project_5/src/profile_tables.py",
+      "bytes": 1052,
+      "sha256": "93da03fd8012a64922881cabe8306ff3b5507ed2faed8b58dbd18d823732b378",
+      "git_blob": "e5ca52a24965271b9942b407949ca6151dc3c565"
+    },
+    {
+      "path": "Project_5/src/routing_metrics.py",
+      "bytes": 4096,
+      "sha256": "1ce0e4abfe42e29df20454b3d02884905a3afa1cba024000513a1ae05ab4ddbe",
+      "git_blob": "056c03d745289573e4934410592dd5a4e8374cb2"
+    },
+    {
+      "path": "Project_5/src/run_company.py",
+      "bytes": 1049,
+      "sha256": "14417c718cf7c15c5e3f52871ce4d16d1c5d9fbf1a3b1cf2b4ea74c864fa824f",
+      "git_blob": "19e8dd9e44d2b9aa1f61b10fe0c04be8900aa043"
+    },
+    {
+      "path": "Project_5/src/run_router_eval.py",
+      "bytes": 3245,
+      "sha256": "8ec758cad5a2b30e7553e3a724d7ef51f2e9844e894a9b917ddd774ebb23479d",
+      "git_blob": "c595bd7b983510ea65f98c193a63e39438e91c0b"
+    },
+    {
+      "path": "Project_5/src/stage2_company.py",
+      "bytes": 3348,
+      "sha256": "2d39ae8c1bf976e7fde21e0abbfd33326dbe6e0d108b58541aa93bbf38d74671",
+      "git_blob": "b558c185606875720dd0a3e2ab194ab73857a98d"
+    },
+    {
+      "path": "Project_5/src/stage2_fulfilment.py",
+      "bytes": 2228,
+      "sha256": "3362a46414c8cb360fb767743c6922e181c70b9f1de8b40e44b7585d5ac7a0a5",
+      "git_blob": "6140176677356b1575ca6f16b5e1646b0cb9ce5d"
+    },
+    {
+      "path": "Project_5/src/stage2_schema.py",
+      "bytes": 3960,
+      "sha256": "de0ac78ccb1a1f9b6d9015b2532f80d13c9bab6385612f13e5bb73a95319c71b",
+      "git_blob": "3e00e7c3940f7215671de45dffe49392e4e0a076"
+    },
+    {
+      "path": "Project_5/src/synthetic_answer_check.py",
+      "bytes": 2367,
+      "sha256": "4369aa36eff989f9c28e69562b5d3e73ee0bdcc515705837f0becfc08ec3d7d9",
+      "git_blob": "d5e9e4964e2e27fd75f01a9de189f013523a7190"
+    },
+    {
+      "path": "Project_5/src/synthetic_routing.py",
+      "bytes": 17227,
+      "sha256": "9b0e9daf4ab36037d401217d243b72a735fc618d8051eaf7efe3cc8e9ca75603",
+      "git_blob": "6ebb2e61ea0674c5a84196b78ecef8e3fb11e55b"
+    },
+    {
+      "path": "Project_5/src/toy_solutions.py",
+      "bytes": 3224,
+      "sha256": "937e4860a99fd4aa0b75fad921977813b0f900d0c995a4201af57e158334ea9c",
+      "git_blob": "1d97cfdd07ec285a3924372d1d15b99a17e0af14"
+    },
+    {
+      "path": "Project_5/src/usage_summary.py",
+      "bytes": 3247,
+      "sha256": "4b67171967b51355822d1e19d08ddf450ea8a00010ece244788bb2527fa2dacc",
+      "git_blob": "65d28b6d3b21713e95892e411a4db1e98cf2d7fe"
+    },
+    {
+      "path": "Project_5/submission/slides.pdf",
+      "bytes": 87591,
+      "sha256": "84725a2f077ef43d2b11450854c0b6531a8cadeb7481739132c6fa7a9833366d",
+      "git_blob": "911602c3a853d43a1aa956632c480f7cdd6129b9"
+    },
+    {
+      "path": "Project_5/submission/slides.pptx",
+      "bytes": 44862,
+      "sha256": "4f70067d1571571fa7f3791c0d3c5e59485e7071a48cbe5e734334b20833eab4",
+      "git_blob": "91a21eb712ccdc6fd65ec31e960603b53aeeeaf6"
+    },
+    {
+      "path": "Project_5/tests/conftest.py",
+      "bytes": 530,
+      "sha256": "47260ddb3efa0ec2c5ec62786aa201721c790bb71d07c2efd3a6ce7fe06c326c",
+      "git_blob": "e2e89b006adc58c277c363136d525324b58e6c36"
+    },
+    {
+      "path": "Project_5/tests/test_flow.py",
+      "bytes": 952,
+      "sha256": "2f1f1e8e023e95135793ae178cddf17d26e28161c9826b38dc083e65f5315b04",
+      "git_blob": "1aca76cb879e1bdac2b5f2687dddb35c64cbbbea"
+    },
+    {
+      "path": "Project_5/tests/test_optimiser.py",
+      "bytes": 1184,
+      "sha256": "5ac530ac8b3caa75f69c0cdfc004934d8b69e52b621cb3320661a6829cea44cc",
+      "git_blob": "58b73be71b599052d4a51b3d66b4c67b1faae97d"
+    },
+    {
+      "path": "Project_5/tests/test_practice.py",
+      "bytes": 294,
+      "sha256": "3e1cf912ce108561229515076cf5c1e6ecac66025af7e0b9ec100028b88166a6",
+      "git_blob": "a63533cc19027e49b39c0db54b52990aa5922e76"
+    },
+    {
+      "path": "Project_5/tests/test_reproducibility.py",
+      "bytes": 1330,
+      "sha256": "c90eff4fcbacadc11014bdcef4c4d13226e3ea6cbb093b86b8beb9d12f3642ac",
+      "git_blob": "f85c40567d99206401477413932c97012a149db0"
+    },
+    {
+      "path": "Project_5/tests/test_router.py",
+      "bytes": 2976,
+      "sha256": "2ae2c22e9368ffab7abb6e558129c7a95aae680d745c906458beccb758dc1764",
+      "git_blob": "852298d0881dff40ffcd532be01ec1532865d160"
+    },
+    {
+      "path": "Project_5/tests/test_submission_files.py",
+      "bytes": 922,
+      "sha256": "cb15ba31a7c8b980fb5b6f652e41d9724c92c8de9080e118b603289895536ff2",
+      "git_blob": "670031b9560d3e6113354231babf95247ffd957f"
+    },
+    {
+      "path": "Project_5/tests/test_toy.py",
+      "bytes": 803,
+      "sha256": "0db6ebe1a0123b172723e72aee1057da76dc056b22557a6f3041a868a37bf3b2",
+      "git_blob": "252bdf24e52dfc29d80e34dfa0a772f461fca0af"
+    },
+    {
+      "path": "Project_5/visualiser/pipeline_visualiser.html",
+      "bytes": 27722,
+      "sha256": "013114ed4da4ef2d4925fce59ae557fec6ff1d49243287d8549adb12b4a7c2a2",
+      "git_blob": "8f35c6e089d7887ce34e58693c039e10011e2f64"
+    }
+  ],
+  "excluded_project_files": [
+    {
+      "path": "Project_5/.gitattributes",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/README.md",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/STUDENT_GUIDE.pdf",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/demo_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/revenue_inputs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_policy.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    }
+  ],
+  "notes": [
+    "Challenge datasets, questions, introductory assets and original organizer material are not duplicated in this archive. Obtain both official student releases separately.",
+    "The presence of team-created answer files or validation outputs does not make them organizer reference answers.",
+    "Reports and slide claims are preserved as submitted; later organizer bonus decisions and provisional grades are recorded in the Project 5 results sheet.",
+    "No canonical Stage 2 final_answers.csv exists in this snapshot. Stage 2 source code or usage evidence must not be interpreted as a submitted final answer file."
+  ]
+}
