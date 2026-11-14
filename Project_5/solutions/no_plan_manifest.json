@@ -1,0 +1,913 @@
+{
+  "team": "No Plan is a plan",
+  "repository": "https://github.com/Andische22/sixt-hackathon-2026",
+  "commit": "6fe3bf63cccf0b592684be75c6351fe95ce3ddee",
+  "source_url": "https://github.com/Andische22/sixt-hackathon-2026/tree/6fe3bf63cccf0b592684be75c6351fe95ce3ddee/Project_5",
+  "snapshot_kind": "Reviewed submission snapshot; not a claim about later commits or an official deadline lock",
+  "canonical_answer_files": {
+    "stage1": "Project_5/public_answers.csv",
+    "stage2": "Project_5/final_answers.csv"
+  },
+  "license_file": "LICENSE",
+  "preservation": "Included source files are byte-for-byte copies of their Git blobs. No team program was executed or edited.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "Project_5/MODEL_DECLARATION.csv",
+      "bytes": 520,
+      "sha256": "c7679f85bf814774d3de5799cd6307dc92d84f1a5a4d9d6abfca69ade99fb3b2",
+      "git_blob": "513252922549be08bcd8eeac23deeffd1559feac"
+    },
+    {
+      "path": "Project_5/SUBMISSION.md",
+      "bytes": 7183,
+      "sha256": "49b5dbd2657ea0c81f1a0a65e78707761db3827d5b2861b017263c43d278ac5f",
+      "git_blob": "d133ecdb412c52798f8ef74efdef03246956ba48"
+    },
+    {
+      "path": "Project_5/final_answers.csv",
+      "bytes": 2572,
+      "sha256": "d0eba30968732a070d0c0d3ffe9ecf1d4962fcd7155d280fb87307cd3d35ea97",
+      "git_blob": "ac72939a3aab4f62ccfc931c720d3d607c86186f"
+    },
+    {
+      "path": "Project_5/public_answers.csv",
+      "bytes": 2462,
+      "sha256": "398cc40ae67a576dc1222d65ed146f509cb3852501e58438349ad3b2cd7b91b5",
+      "git_blob": "67d1e590260d418c8fbf4f2deecd8683354e0c58"
+    },
+    {
+      "path": "Project_5/solution R/MODEL_DECLARATION.csv",
+      "bytes": 512,
+      "sha256": "7cae5958181b64a103694365ca3ae68e2e0c0f69b4fa2e838d0023a00fe4dc37",
+      "git_blob": "e266d1b413563d7974bb4751b14da25a5e4c0575"
+    },
+    {
+      "path": "Project_5/solution R/README.md",
+      "bytes": 1870,
+      "sha256": "d50dc0c72b9af72133aa9910e682414471f57943d8e8f6cb4df43686afc809ea",
+      "git_blob": "b1252dfcabc1de05963cd1f6278715dc36df9f42"
+    },
+    {
+      "path": "Project_5/solution R/SUBMISSION.md",
+      "bytes": 6924,
+      "sha256": "92ef9a6672982885319a258383d76d4d7a564ff582ac519f20f56a27d9b723a6",
+      "git_blob": "a3d0b9407d8bdc626618f8c7b2185113949a1f07"
+    },
+    {
+      "path": "Project_5/solution R/codex_data.R",
+      "bytes": 8390,
+      "sha256": "682de7a1e46143f3242ff16772705d45b1fdd2e23c2d63b8b296f373968805ef",
+      "git_blob": "ae9a3dafb5aac4b04810451996d28e8834f6b82f"
+    },
+    {
+      "path": "Project_5/solution R/codex_final_columns.csv",
+      "bytes": 2810,
+      "sha256": "005a856577fc0e3774abd96fcaa06333120c5f920d3cf0e1ef11c335e6282d93",
+      "git_blob": "9f8ee6105334dd4391fa5581c122a9ab07fcd57a"
+    },
+    {
+      "path": "Project_5/solution R/codex_metrics.R",
+      "bytes": 11575,
+      "sha256": "e825b93387b4e5b9371838675876443b8903770420f89951235629c51870f465",
+      "git_blob": "1d994152f02b0961387afe3747f3cfb32ea504c9"
+    },
+    {
+      "path": "Project_5/solution R/codex_model_evidence.md",
+      "bytes": 1278,
+      "sha256": "bafd83480580b4d993d91674875bf5512491eed32a40e6f1ea172b54c53bc52f",
+      "git_blob": "4dc712d36b52971d8e97653d7b33be3443a2da09"
+    },
+    {
+      "path": "Project_5/solution R/codex_operations.R",
+      "bytes": 8657,
+      "sha256": "f7c708e40c3a2d79b00e91de7dd96c92971d43b25129713da614f943b4cca671",
+      "git_blob": "e956f234c4b3484648a3d4fb647f1aa58eff4c6e"
+    },
+    {
+      "path": "Project_5/solution R/codex_scenarios.R",
+      "bytes": 10475,
+      "sha256": "29bc3734cdc9c82b420b6f1ed1d3693bd3127ca66fb2f5f7f9a0c19487534646",
+      "git_blob": "4f928e4a5c1c7873159cf2041ad20a5b48bafab9"
+    },
+    {
+      "path": "Project_5/solution R/codex_simulated_demo.R",
+      "bytes": 4636,
+      "sha256": "1497e0b8e697593d08665a914a8c195b14eb1044369243023310db66c54e425c",
+      "git_blob": "608cf0e2cf0472ba47663f4629574f281f248953"
+    },
+    {
+      "path": "Project_5/solution R/codex_slides.R",
+      "bytes": 3102,
+      "sha256": "c669d22909e7c19665e2df34c043b31a7c3ae86a35e819284539445b244b9718",
+      "git_blob": "860241c389a38b63a47cd3f73d65ff84c21c6d33"
+    },
+    {
+      "path": "Project_5/solution R/codex_solve.R",
+      "bytes": 3111,
+      "sha256": "a3c549eeb71b4ac535f832f06fe59479abeecbff6bd0c1686965f655139b3a9f",
+      "git_blob": "b9fa604dc55f1f2e533038f6bbd512e815e37598"
+    },
+    {
+      "path": "Project_5/solution R/codex_validate.R",
+      "bytes": 4316,
+      "sha256": "5533ed162d758b16711c95d98ddf0dfa72c462d1b8811ebae4757e70ad02de21",
+      "git_blob": "b5b3870acb99244f0be98faa8f5e69fddf823977"
+    },
+    {
+      "path": "Project_5/solution R/final_answers.csv",
+      "bytes": 3376,
+      "sha256": "2dd08cd78f3c514b3a9f8a0a5b4d2ea9561046da3b8abda3feb623e6750783c0",
+      "git_blob": "c2cdb54ab79cf49c76509fb737e8cf9e4015d202"
+    },
+    {
+      "path": "Project_5/solution R/instruction manual.md",
+      "bytes": 2317,
+      "sha256": "98c998af836a1b5f11e2cc3ff755bc0ff64efed5b2740bfcf3f40e45fac5f067",
+      "git_blob": "0255917925851e2654c433bcac9d451aa6da52c5"
+    },
+    {
+      "path": "Project_5/solution R/public_answers.csv",
+      "bytes": 3266,
+      "sha256": "45e5e2e79de6952179af3bc660d535bb24c8a1f3acb541d0ca7bb023d783b98e",
+      "git_blob": "de5568334faf1e398d538bd11900700f0e584bb7"
+    },
+    {
+      "path": "Project_5/solution R/solution R.Rproj",
+      "bytes": 190,
+      "sha256": "826f654e0d0eee1ede4be6707d554e549d37d39cead057600e57ab3e11acccb4",
+      "git_blob": "ffefba45f6460ed1f0b61356128ebbfdc8d7e521"
+    },
+    {
+      "path": "Project_5/solution R/submission/slides.pdf",
+      "bytes": 7091,
+      "sha256": "72a2898dc1ba0e26eb8767244e38144d07b0f09647cc750f3746c563eace02c4",
+      "git_blob": "2b0c1cd7e2cb76182e633b269b56e420bf2790d3"
+    },
+    {
+      "path": "Project_5/solution python/MODEL_DECLARATION.csv",
+      "bytes": 504,
+      "sha256": "be5f7f481951ecc55b83be7430e44ce910fbb57e91bd287f3f8c47feace24bfe",
+      "git_blob": "6441fd12673fc842117131a020dbe2cc1f62091f"
+    },
+    {
+      "path": "Project_5/solution python/README.md",
+      "bytes": 1791,
+      "sha256": "669f0cb4bb9db72f12f6cbfb26be943d6b68f64bed89a53719f739f0aa060d84",
+      "git_blob": "93afa6f0fa9875df2c5c1e90388aa821080c2627"
+    },
+    {
+      "path": "Project_5/solution python/SUBMISSION.md",
+      "bytes": 6976,
+      "sha256": "a9da9dde3d944ff3ebdf6b60f9362cb08bf67c9a0e9e7868f36d723dfa64c3bc",
+      "git_blob": "60b268ac168ab8c44faf58f42cf805729caea8f2"
+    },
+    {
+      "path": "Project_5/solution python/codex_data.py",
+      "bytes": 7608,
+      "sha256": "e6e8aa6b2a1a1b51710168a4105fb2ee2905ceb5d92d3814aacfb311b66f0508",
+      "git_blob": "d4c97253099db03ed5e097fedfdbbb2b85f4ef04"
+    },
+    {
+      "path": "Project_5/solution python/codex_final_columns.csv",
+      "bytes": 2810,
+      "sha256": "005a856577fc0e3774abd96fcaa06333120c5f920d3cf0e1ef11c335e6282d93",
+      "git_blob": "9f8ee6105334dd4391fa5581c122a9ab07fcd57a"
+    },
+    {
+      "path": "Project_5/solution python/codex_integer_search.cs",
+      "bytes": 4131,
+      "sha256": "5d2e800fd23b1e92de465c822d7e449440801a005051d2986929ff0e9dd6dab7",
+      "git_blob": "a8e8ec848d9e4899aff6f93587f79f7c9b63f359"
+    },
+    {
+      "path": "Project_5/solution python/codex_metrics.py",
+      "bytes": 18591,
+      "sha256": "c707b8500f15179f348acc0096838cf659e1cdba071afce470f3a4e529290b66",
+      "git_blob": "9dd9398a9c82dea0b6309c62e47458e8ba1d5af4"
+    },
+    {
+      "path": "Project_5/solution python/codex_model_evidence.md",
+      "bytes": 1141,
+      "sha256": "af76c3b2921792aae495810d0ae3386168e0a85c91df86dc285d295e35895465",
+      "git_blob": "05355b39c13c219b3b88155ff541dc7d9b03d770"
+    },
+    {
+      "path": "Project_5/solution python/codex_operations.py",
+      "bytes": 12177,
+      "sha256": "b703913f5610ce30946861fca7d15ea6631bcb32c60302ea6c16df9f0e362416",
+      "git_blob": "b85033fbf7764423a97aadcd5df9398c1c71244e"
+    },
+    {
+      "path": "Project_5/solution python/codex_requirements.txt",
+      "bytes": 126,
+      "sha256": "132728eb224667b600a98969a3e0b99d53b0d8c15e9467887d076cff8e486a7c",
+      "git_blob": "818134b70dd8c34efb032e52a62742f8a9c13780"
+    },
+    {
+      "path": "Project_5/solution python/codex_scenarios.py",
+      "bytes": 11632,
+      "sha256": "eacd5280ed64f374e6f385cf89ec5d66244512e0fd11844392ac3b52231f7d41",
+      "git_blob": "d43937fedec97b123cdcf58f520a2da67a7f9d17"
+    },
+    {
+      "path": "Project_5/solution python/codex_simulated_demo.py",
+      "bytes": 5247,
+      "sha256": "d3441b10a6a896bd5838e14ac0959892022c506a2162cb41acb0393807515ff7",
+      "git_blob": "c6bf753e8745cda807392a2fbfec1ef82d35a9a4"
+    },
+    {
+      "path": "Project_5/solution python/codex_slides.py",
+      "bytes": 3477,
+      "sha256": "385bbaaf4a924b9baf788ed9d69be0a2a558cbb213f6dd2ca8240885e3705a0c",
+      "git_blob": "0a1b3ec3eeb39a9b4aee5338c58616f788d64ddc"
+    },
+    {
+      "path": "Project_5/solution python/codex_solve.py",
+      "bytes": 3448,
+      "sha256": "55e427a73f125be61dac130543eeff8f9cc32dd6f7553cebb9db0cae1e7b2273",
+      "git_blob": "2311e44e527cec8d90bc9d4aa2606f7d87978b60"
+    },
+    {
+      "path": "Project_5/solution python/codex_validate.py",
+      "bytes": 5702,
+      "sha256": "57c9790cafe5bdacc519530e585c71876da938502ece7f1fe3050d0361f0fb89",
+      "git_blob": "2676a1ec3f61dc38c2a51bbf1b31139408858eea"
+    },
+    {
+      "path": "Project_5/solution python/final_answers.csv",
+      "bytes": 2572,
+      "sha256": "d0eba30968732a070d0c0d3ffe9ecf1d4962fcd7155d280fb87307cd3d35ea97",
+      "git_blob": "ac72939a3aab4f62ccfc931c720d3d607c86186f"
+    },
+    {
+      "path": "Project_5/solution python/instruction manual.md",
+      "bytes": 2345,
+      "sha256": "cf64d725bc862792db1975b2c77e4c68b3ecd139556141ee609cc2726c534522",
+      "git_blob": "53018017fb848128c62acf0fb3b21bdf1a5afc41"
+    },
+    {
+      "path": "Project_5/solution python/public_answers.csv",
+      "bytes": 2462,
+      "sha256": "398cc40ae67a576dc1222d65ed146f509cb3852501e58438349ad3b2cd7b91b5",
+      "git_blob": "67d1e590260d418c8fbf4f2deecd8683354e0c58"
+    },
+    {
+      "path": "Project_5/solution python/submission/slides.pdf",
+      "bytes": 5607,
+      "sha256": "78ffac089750d22805bc4c5a5bd23596b8a9857ed3b261065b36da29d5975040",
+      "git_blob": "89cea46dab83f3e6567e1ac14b5c3f39344e2788"
+    },
+    {
+      "path": "Project_5/submission/slides.pdf",
+      "bytes": 5607,
+      "sha256": "78ffac089750d22805bc4c5a5bd23596b8a9857ed3b261065b36da29d5975040",
+      "git_blob": "89cea46dab83f3e6567e1ac14b5c3f39344e2788"
+    }
+  ],
+  "excluded_project_files": [
+    {
+      "path": "Project_5/.gitattributes",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/README.md",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/STUDENT_GUIDE.pdf",
+      "reason": "Organizer challenge scaffold or introductory material already available in the main repository"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/challenge_architecture.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/assets/marking_scheme.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/demo_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/revenue_inputs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/examples/stock_policy.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final.zip",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/CITATION.cff",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/CITATION.txt",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/EVENT_RULES.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/HARD_TASK_RULES.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/METHOD_REPORT_TEMPLATE.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/MODEL_DECLARATION.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/PACKAGE_MANIFEST.json",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/arxiv_report/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/arxiv_report/main.tex",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/arxiv_report/references.bib",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/business_rules.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/check_submission.py",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/data_dictionary.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/account_contract_versions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/accounts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/customers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/employee_regions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/flow_cases.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/flow_contracts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/flow_events.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/flow_orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/flow_stock.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/fx_rates.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/goods_receipts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_cases.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_changes.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_dispatch.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_jobs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_options.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_stock.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/hard_opt_suppliers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/inventory_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/marketing_touches.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/order_items.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/product_category_history.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/products.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/promotions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/purchase_order_lines.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/refunds.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/return_inspections.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/sales_targets.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/shipments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/stock_policies.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/suppliers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/support_tickets.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/support_worklogs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/warehouse_inventory.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/datasets/web_sessions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/final_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/final_questions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/.gitattributes",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/STUDENT_GUIDE.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/challenge_architecture.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/challenge_architecture.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/challenge_architecture.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/marking_scheme.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/marking_scheme.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/assets/marking_scheme.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/demo_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/revenue_inputs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/stock_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_final/preview/examples/stock_policy.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start.zip",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/CITATION.cff",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/CITATION.txt",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/EVENT_RULES.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/HARD_TASK_RULES.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/METHOD_REPORT_TEMPLATE.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/MODEL_DECLARATION.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/PACKAGE_MANIFEST.json",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/arxiv_report/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/arxiv_report/main.tex",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/arxiv_report/references.bib",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/business_rules.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/check_submission.py",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/data_dictionary.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/account_contract_versions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/accounts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/customers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/employee_regions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/flow_cases.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/flow_contracts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/flow_events.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/flow_orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/flow_stock.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/fx_rates.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/goods_receipts.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_cases.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_changes.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_dispatch.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_jobs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_options.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_stock.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/hard_opt_suppliers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/inventory_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/marketing_touches.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/order_items.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/product_category_history.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/products.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/promotions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/purchase_order_lines.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/refunds.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/return_inspections.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/sales_targets.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/shipments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/stock_policies.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/suppliers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/support_tickets.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/support_worklogs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/warehouse_inventory.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/datasets/web_sessions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/.gitattributes",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/STUDENT_GUIDE.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/challenge_architecture.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/challenge_architecture.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/challenge_architecture.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/marking_scheme.pdf",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/marking_scheme.png",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/assets/marking_scheme.svg",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/README.md",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/demo_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/orders.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/payments.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/revenue_inputs.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/stock_movements.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/preview/examples/stock_policy.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/public_answers.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/public_leaderboard_questions.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/problem7_student_start/solved_examples.csv",
+      "reason": "Organizer challenge material or duplicate released datasets; obtain the official student release separately"
+    },
+    {
+      "path": "Project_5/solution python/codex_integer_search.exe",
+      "reason": "Generated executable or cache; submitted build source is retained where present"
+    }
+  ],
+  "notes": [
+    "Challenge datasets, questions, introductory assets and original organizer material are not duplicated in this archive. Obtain both official student releases separately.",
+    "The presence of team-created answer files or validation outputs does not make them organizer reference answers.",
+    "Reports and slide claims are preserved as submitted; later organizer bonus decisions and provisional grades are recorded in the Project 5 results sheet.",
+    "Alternative Python/R answer copies are retained. Only the root Project_5 answer pair was graded. The C# executable is excluded; its source and the team build instructions are retained."
+  ]
+}
